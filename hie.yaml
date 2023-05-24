@@ -1,0 +1,13 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "plotly-hs:lib"
+
+    - path: "./app/Main.hs"
+      component: "plotly-hs:exe:plotly-hs-exe"
+
+    - path: "./app/Paths_plotly_hs.hs"
+      component: "plotly-hs:exe:plotly-hs-exe"
+
+    - path: "./test"
+      component: "plotly-hs:test:plotly-hs-test"
