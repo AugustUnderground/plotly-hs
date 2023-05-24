@@ -2,7 +2,7 @@
 
 Generates an HTML Document with a Plotly Plot. These are _not_ bindings to anything.
 
-For more details see the [documentation](https://augustundeground.github.io/plotly-hs).
+For more details see the [documentation](https://augustunderground.github.io/plotly-hs).
 
 ## Example
 
@@ -28,5 +28,5 @@ Add this to `stack.yaml`:
 ```yaml
 extra-deps:
   - github: AugustUnderground/plotly-hs
-    commit: <latest commit>
+    commit: 8cf30ce82ede0b5f70944950a6c8aae3ca18bee4 # Or lates commit
 ```
