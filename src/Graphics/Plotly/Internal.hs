@@ -11,18 +11,19 @@
 module Graphics.Plotly.Internal where
 
 import           Data.Aeson
+import           Data.Aeson.Types
 import           GHC.Generics
 import qualified Data.ByteString.Lazy       as BL
 import qualified Data.ByteString.Lazy.Char8 as C8
 import           Data.ByteString.Lazy             (ByteString)
 
+-- | Thanks Alan Zimmerman
+-- https://gist.github.com/alanz/2465584
+omitNulls :: [Pair] -> [Pair]
+omitNulls = filter ((/= Null) . snd)
+
 -- | Internal Type Alias
 type Script = ByteString
-
--- | Prints "null" for Nothing, works good with JSON
-showMaybe :: (Show a) => Maybe a -> String
-showMaybe (Just a) = show a
-showMaybe Nothing  = "null"
 
 -- | Takes a Script and inserts it into the default HTML template
 toHtml :: Script -> ByteString
@@ -71,7 +72,7 @@ instance ToJSON Axis where
   toJSON Axis{..} = object [ "title"    .= title
                            , "showgrid" .= showGrid
                            , "zeroline" .= zeroLine
-                           , "type"     .= show type' ]
+                           , "type"     .= type' ]
 
 -- | Parallel Coordinate Lines
 data Line = Line { showscale    :: !(Maybe Bool)       -- ^ Show Color Bar
@@ -97,12 +98,13 @@ data Trace = Trace { name  :: !(Maybe String)   -- ^ Trace Name
                    } deriving (Generic, Show)
 
 instance ToJSON Trace where
-  toJSON Trace{..} = object [ "name"   .= name
-                            , "x"      .= x
-                            , "y"      .= y
-                            , "z"      .= z
-                            , "mode"   .= showMaybe mode
-                            , "type"   .= show type' ]
+  toJSON Trace{..} = object
+                   $ omitNulls [ "name"   .= name
+                               , "x"      .= x
+                               , "y"      .= y
+                               , "z"      .= z
+                               , "mode"   .= mode
+                               , "type"   .= type' ]
 
 -- | Heatmap Trace
 data TraceH = TraceH { z           :: ![[Double]]         -- ^ Data Matrix
@@ -121,7 +123,7 @@ instance ToJSON TraceH where
                              , "hoverongaps" .= hoverOnGaps
                              , "showscale"   .= showScale
                              , "colorscale"  .= colorScale
-                             , "type"        .= show type' ]
+                             , "type"        .= type' ]
 
 -- | Surface Trace
 data TraceS = TraceS { name        :: !(Maybe String)     -- ^ Trace Name
@@ -138,7 +140,7 @@ instance ToJSON TraceS where
                              , "x"          .= x
                              , "y"          .= y
                              , "colorscale" .= colorScale
-                             , "type"       .= show type' ]
+                             , "type"       .= type' ]
 
 -- | Parallel Coordinate Trace
 data TraceP = TraceP { type'      :: !Type         -- ^ ParCoords
@@ -147,9 +149,10 @@ data TraceP = TraceP { type'      :: !Type         -- ^ ParCoords
                      } deriving (Show)
 
 instance ToJSON TraceP where
-  toJSON TraceP{..} = object [ "dimensions" .= dimensions
-                             , "line"       .= line
-                             , "type"       .= show type' ]
+  toJSON TraceP{..} = object
+                    $ omitNulls [ "dimensions" .= dimensions
+                                , "line"       .= line
+                                , "type"       .= type' ]
 
 -- | Axis Dimension for Parallel Coordinate Plot
 data Dimension = Dimension { range  :: !(Maybe [Int])
@@ -164,41 +167,26 @@ data Type = Scatter   -- ^ Scatter Plot
           | Scatter3D -- ^ 3D Scatter
           | Surface   -- ^ 3D Surface
           | ParCoords -- ^ Parallel Coordinate Plot
-          deriving (Eq,Generic, ToJSON)
+          deriving (Eq, Generic, Show)
 
-instance Show Type where
-  show Scatter   = "scatter"
-  show Histogram = "histogram"
-  show Heatmap   = "heatmap"
-  show Scatter3D = "scatter3d"
-  show Surface   = "surface"
-  show ParCoords = "parcoords"
-
-instance Read Type where
-  readsPrec _ "scatter"   = [(Scatter,  "")]
-  readsPrec _ "histogram" = [(Histogram,  "")]
-  readsPrec _ "heatmap"   = [(Heatmap,  "")]
-  readsPrec _ "scatter3d" = [(Scatter3D,  "")]
-  readsPrec _ "surface"   = [(Surface,  "")]
-  readsPrec _ "parcoords" = [(ParCoords,  "")]
-  readsPrec _ _           = undefined
+instance ToJSON Type where
+  toJSON Scatter   = "scatter"
+  toJSON Histogram = "histogram"
+  toJSON Heatmap   = "heatmap"
+  toJSON Scatter3D = "scatter3d"
+  toJSON Surface   = "surface"
+  toJSON ParCoords = "parcoords"
 
 -- | Scatter Mode
 data Mode = Lines        -- ^ Draw Lines
           | Markers      -- ^ Draw Markers only
           | LinesMarkers -- ^ Draw Both
-          deriving (Eq,Generic, ToJSON)
+          deriving (Eq, Generic, Show)
 
-instance Show Mode where
-  show Lines        = "lines"
-  show Markers      = "markers"
-  show LinesMarkers = "lines+markers"
-
-instance Read Mode where
-  readsPrec _ "lines"         = [(Lines, "")]
-  readsPrec _ "markers"       = [(Markers, "")]
-  readsPrec _ "lines+markers" = [(LinesMarkers, "")]
-  readsPrec _ _               = undefined
+instance ToJSON Mode where
+  toJSON Lines        = "lines"
+  toJSON Markers      = "markers"
+  toJSON LinesMarkers = "lines+markers"
 
 -- | Marker Symbols
 data Symbol = Circle
@@ -209,28 +197,17 @@ data Symbol = Circle
             | Square
             | SquareOpen
             | X
-            deriving (Generic, ToJSON)
+            deriving (Eq, Show, Generic)
 
-instance Show Symbol where
-  show Circle      = "circle"
-  show CircleOpen  = "circle-open"
-  show Cross       = "cross"
-  show Diamond     = "diamond"
-  show DiamondOpen = "diamond-open"
-  show Square      = "square"
-  show SquareOpen  = "square-open"
-  show X           = "x"
-
-instance Read Symbol where
-  readsPrec _ "circle"       = [(Circle, "")]
-  readsPrec _ "circle-open"  = [(CircleOpen, "")]
-  readsPrec _ "cross"        = [(Cross, "")]
-  readsPrec _ "diamond"      = [(Diamond, "")]
-  readsPrec _ "diamond-open" = [(DiamondOpen, "")]
-  readsPrec _ "square"       = [(Square, "")]
-  readsPrec _ "square-open"  = [(SquareOpen, "")]
-  readsPrec _ "x"            = [(X, "")]
-  readsPrec _ _              = undefined
+instance ToJSON Symbol where
+  toJSON Circle      = "circle"
+  toJSON CircleOpen  = "circle-open"
+  toJSON Cross       = "cross"
+  toJSON Diamond     = "diamond"
+  toJSON DiamondOpen = "diamond-open"
+  toJSON Square      = "square"
+  toJSON SquareOpen  = "square-open"
+  toJSON X           = "x"
 
 -- | Color scales for Heamap / 3D Plots
 data ColorScale = Blackbody
@@ -258,20 +235,13 @@ data BarMode = Stack    -- ^ Stacked
              | Group    -- ^ Grouped
              | Overlay  -- ^ Overlayed
              | Relative -- ^ Relative
-             deriving (Eq, Generic, ToJSON)
+             deriving (Eq, Generic, Show)
 
-instance Show BarMode where
-  show Stack    = "stack"
-  show Group    = "group"
-  show Overlay  = "overlay"
-  show Relative = "relative"
-
-instance Read BarMode where
-  readsPrec _ "stack"    = [(Stack, "")]
-  readsPrec _ "group"    = [(Group, "")]
-  readsPrec _ "overlay"  = [(Overlay, "")]
-  readsPrec _ "relative" = [(Relative, "")]
-  readsPrec _ _          = undefined
+instance ToJSON BarMode where
+  toJSON Stack    = "stack"
+  toJSON Group    = "group"
+  toJSON Overlay  = "overlay"
+  toJSON Relative = "relative"
 
 -- | Generates line for @data@ variable for @N@ traces
 traceData :: Int -> Script

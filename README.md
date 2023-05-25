@@ -15,11 +15,18 @@ import Graphics.Plotly
 main :: IO ()
 main = plot path script
   where
-    script = scatter [[1, 2, 3, 4], [1, 2, 3, 4]] [[10, 15, 13, 17],[16, 5, 11, 9]] LinesMarkers
+    script = scatter' [] [[1, 2, 3, 4], [1, 2, 3, 4]]
+                         [[10, 15, 13, 17], [16, 5, 11, 9]]
+           $ defaultConfig { lineMode = LinesMarkers }
     path   = "path/to/dir/plot.html"
 ```
 
 Then navigate to `path/to/dir/plot.html` with a web browser.
+
+### More Examples
+
+More examples can be found in `./src/Graphics/Plotly/Example.hs` the results of
+which are stored in `./plots`.
 
 ## Usage with Stack
 

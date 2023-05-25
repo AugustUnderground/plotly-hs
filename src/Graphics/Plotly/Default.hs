@@ -32,7 +32,7 @@ data PlotConfig = PlotConfig { title'       :: !String     -- ^ Plot Title (defa
                              , legend       :: !Bool       -- ^ Show Legend (default True)
                              , height       :: !Int        -- ^ Canvas Height in Pixels (default 800)
                              , width        :: !Int        -- ^ Canvas Width in Pixels (default 800)
-                             , margin       :: !Margin     -- ^ Layout margin (default 0 0 0 0)
+                             , margin       :: !Margin     -- ^ Layout margin (default 66 66 66 66)
                              , marker       :: !Marker     -- ^ Marker (default 0.5 Circle 1.0)
                              } deriving (Show)
 
@@ -51,6 +51,6 @@ defaultConfig = PlotConfig { title'       = ""
                            , legend       = True
                            , height       = 800
                            , width        = 800
-                           , margin       = Margin 0 0 0 0
+                           , margin       = Margin 66 66 66 66
                            , marker       = Marker 0.1 Circle 1.0
                            }

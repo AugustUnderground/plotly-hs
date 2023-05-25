@@ -11,14 +11,11 @@
 -- | Internal Functions and Types for Plotly Plots in Haskell
 module Graphics.Plotly.Internal
 
--- | Config to Layout
-fromConfig :: PlotConfig -> Layout
+-- | Thanks Alan Zimmerman <a>https://gist.github.com/alanz/2465584</a>
+omitNulls :: [Pair] -> [Pair]
 
 -- | Internal Type Alias
 type Script = ByteString
-
--- | Prints "null" for Nothing, works good with JSON
-showMaybe :: Show a => Maybe a -> String
 
 -- | Takes a Script and inserts it into the default HTML template
 toHtml :: Script -> ByteString
@@ -101,6 +98,22 @@ Axis :: !String -> !Bool -> !Bool -> !AxisType -> Axis
 -- | Axis Type
 [$sel:type':Axis] :: Axis -> !AxisType
 
+-- | Parallel Coordinate Lines
+data Line
+Line :: !Maybe Bool -> !Maybe Bool -> !Maybe ColorScale -> ![Double] -> Line
+
+-- | Show Color Bar
+[$sel:showscale:Line] :: Line -> !Maybe Bool
+
+-- | Reverse the Color Scale
+[$sel:reversescale:Line] :: Line -> !Maybe Bool
+
+-- | Color Scale
+[$sel:colorscale:Line] :: Line -> !Maybe ColorScale
+
+-- | Values represnting the color
+[$sel:color:Line] :: Line -> ![Double]
+
 -- | Marker Config
 data Marker
 Marker :: !Double -> !Symbol -> !Double -> Marker
@@ -116,13 +129,13 @@ Marker :: !Double -> !Symbol -> !Double -> Marker
 
 -- | Data Trace
 data Trace
-Trace :: !Maybe String -> ![Double] -> !Maybe [Double] -> !Maybe [Double] -> !Maybe Mode -> !Type -> !Maybe Marker -> Trace
+Trace :: !Maybe String -> !Maybe [Double] -> !Maybe [Double] -> !Maybe [Double] -> !Maybe Mode -> !Type -> !Maybe Marker -> Trace
 
 -- | Trace Name
 [$sel:name:Trace] :: Trace -> !Maybe String
 
 -- | X axis values
-[$sel:x:Trace] :: Trace -> ![Double]
+[$sel:x:Trace] :: Trace -> !Maybe [Double]
 
 -- | Y axis values
 [$sel:y:Trace] :: Trace -> !Maybe [Double]
@@ -164,6 +177,48 @@ TraceH :: ![[Double]] -> !Maybe [String] -> !Maybe [String] -> !Type -> !Maybe B
 -- | Color Scale
 [$sel:colorScale:TraceH] :: TraceH -> !Maybe ColorScale
 
+-- | Surface Trace
+data TraceS
+TraceS :: !Maybe String -> ![[Double]] -> !Maybe [Double] -> !Maybe [Double] -> !Type -> !Maybe ColorScale -> TraceS
+
+-- | Trace Name
+[$sel:name:TraceS] :: TraceS -> !Maybe String
+
+-- | Data Matrix
+[$sel:z:TraceS] :: TraceS -> ![[Double]]
+
+-- | Y labels
+[$sel:x:TraceS] :: TraceS -> !Maybe [Double]
+
+-- | Y Labels
+[$sel:y:TraceS] :: TraceS -> !Maybe [Double]
+
+-- | Surface
+[$sel:type':TraceS] :: TraceS -> !Type
+
+-- | Color Scale
+[$sel:colorScale:TraceS] :: TraceS -> !Maybe ColorScale
+
+-- | Parallel Coordinate Trace
+data TraceP
+TraceP :: !Type -> !Maybe Line -> ![Dimension] -> TraceP
+
+-- | ParCoords
+[$sel:type':TraceP] :: TraceP -> !Type
+
+-- | Line Configuration
+[$sel:line:TraceP] :: TraceP -> !Maybe Line
+
+-- | Dimensions
+[$sel:dimensions:TraceP] :: TraceP -> ![Dimension]
+
+-- | Axis Dimension for Parallel Coordinate Plot
+data Dimension
+Dimension :: !Maybe [Int] -> !String -> ![Double] -> Dimension
+[$sel:range:Dimension] :: Dimension -> !Maybe [Int]
+[$sel:label:Dimension] :: Dimension -> !String
+[$sel:values:Dimension] :: Dimension -> ![Double]
+
 -- | Plot Type
 data Type
 
@@ -181,6 +236,9 @@ Scatter3D :: Type
 
 -- | 3D Surface
 Surface :: Type
+
+-- | Parallel Coordinate Plot
+ParCoords :: Type
 
 -- | Scatter Mode
 data Mode
@@ -241,9 +299,90 @@ Overlay :: BarMode
 -- | Relative
 Relative :: BarMode
 
+-- | Generates line for <tt>data</tt> variable for <tt>N</tt> traces
+traceData :: Int -> Script
+
+-- | Generates line for <tt>i</tt>th <tt>trace</tt> variable
+traceLine :: ToJSON a => a -> Int -> ByteString
+
+-- | Converts layout and list of traces to <tt>Script</tt> for insertion
+--   into HTML
+toScript :: ToJSON a => Maybe Layout -> [a] -> ByteString
+
+-- | Trace contructor, different order of arguments
+mkTrace :: Maybe String -> Maybe Mode -> Maybe Marker -> Type -> [Double] -> [Double] -> [Double] -> Trace
+
+-- | Heatmap Trace constructor
+mkTraceH :: ColorScale -> Bool -> Bool -> [String] -> [String] -> [[Double]] -> TraceH
+
+-- | Heatmap Trace constructor
+mkTraceS :: Maybe String -> ColorScale -> [Double] -> [Double] -> [[Double]] -> TraceS
+
+-- | Parallel Coordinate Trace Constructor
+mkTraceP :: ColorScale -> Bool -> Bool -> [Double] -> [String] -> [[Double]] -> TraceP
+
+-- | Parallel Coordinate Trace Constructor without Line configuration
+mkTraceP' :: [String] -> [[Double]] -> TraceP
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Margin
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Margin
+instance GHC.Show.Show Graphics.Plotly.Internal.Margin
+instance GHC.Classes.Eq Graphics.Plotly.Internal.Margin
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.AxisType
+instance GHC.Generics.Generic Graphics.Plotly.Internal.AxisType
+instance GHC.Show.Show Graphics.Plotly.Internal.AxisType
+instance GHC.Classes.Eq Graphics.Plotly.Internal.AxisType
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Axis
+instance GHC.Show.Show Graphics.Plotly.Internal.Axis
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Dimension
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Dimension
+instance GHC.Show.Show Graphics.Plotly.Internal.Dimension
+instance GHC.Show.Show Graphics.Plotly.Internal.Type
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Type
+instance GHC.Classes.Eq Graphics.Plotly.Internal.Type
+instance GHC.Show.Show Graphics.Plotly.Internal.Mode
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Mode
+instance GHC.Classes.Eq Graphics.Plotly.Internal.Mode
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Symbol
+instance GHC.Show.Show Graphics.Plotly.Internal.Symbol
+instance GHC.Classes.Eq Graphics.Plotly.Internal.Symbol
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Marker
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Marker
+instance GHC.Show.Show Graphics.Plotly.Internal.Marker
+instance GHC.Show.Show Graphics.Plotly.Internal.Trace
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Trace
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.ColorScale
+instance GHC.Generics.Generic Graphics.Plotly.Internal.ColorScale
+instance GHC.Show.Show Graphics.Plotly.Internal.ColorScale
+instance GHC.Classes.Eq Graphics.Plotly.Internal.ColorScale
+instance GHC.Show.Show Graphics.Plotly.Internal.TraceS
+instance GHC.Show.Show Graphics.Plotly.Internal.TraceH
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Line
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Line
+instance GHC.Show.Show Graphics.Plotly.Internal.Line
+instance GHC.Show.Show Graphics.Plotly.Internal.TraceP
+instance GHC.Show.Show Graphics.Plotly.Internal.BarMode
+instance GHC.Generics.Generic Graphics.Plotly.Internal.BarMode
+instance GHC.Classes.Eq Graphics.Plotly.Internal.BarMode
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Layout
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Layout
+instance GHC.Show.Show Graphics.Plotly.Internal.Layout
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.BarMode
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.TraceP
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.TraceH
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.TraceS
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Trace
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Symbol
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Mode
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Type
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Axis
+
+
+-- | Default Plot Configuration
+module Graphics.Plotly.Default
+
 -- | Trace Independent Plot Config
 data PlotConfig
-PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMode -> !Mode -> !ColorScale -> !Bool -> !Int -> !Int -> !Margin -> !Marker -> PlotConfig
+PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMode -> !Mode -> !ColorScale -> !Bool -> !Bool -> !Bool -> !Int -> !Int -> !Margin -> !Marker -> PlotConfig
 
 -- | Plot Title (default "")
 [$sel:title':PlotConfig] :: PlotConfig -> !String
@@ -269,6 +408,12 @@ PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMod
 -- | Color Scale for 3D (default Viridis)
 [$sel:colorScale:PlotConfig] :: PlotConfig -> !ColorScale
 
+-- | Show Color Bar (default True)
+[$sel:showScale:PlotConfig] :: PlotConfig -> !Bool
+
+-- | Reverse the color scale (default False)
+[$sel:reverseScale:PlotConfig] :: PlotConfig -> !Bool
+
 -- | Show Legend (default True)
 [$sel:legend:PlotConfig] :: PlotConfig -> !Bool
 
@@ -278,7 +423,7 @@ PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMod
 -- | Canvas Width in Pixels (default 800)
 [$sel:width:PlotConfig] :: PlotConfig -> !Int
 
--- | Layout margin (default 0 0 0 0)
+-- | Layout margin (default 66 66 66 66)
 [$sel:margin:PlotConfig] :: PlotConfig -> !Margin
 
 -- | Marker (default 0.5 Circle 1.0)
@@ -287,79 +432,9 @@ PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMod
 -- | Default <tt>PlotConfig</tt>
 defaultConfig :: PlotConfig
 
--- | Generates line for <tt>data</tt> variable for <tt>N</tt> traces
-traceData :: Int -> Script
-
--- | Generates line for <tt>i</tt>th <tt>trace</tt> variable
-traceLine :: ToJSON a => a -> Int -> ByteString
-
--- | Converts layout and list of traces to <tt>Script</tt> for insertion
---   into HTML
-toScript :: ToJSON a => Maybe Layout -> [a] -> ByteString
-
--- | Trace contructor, different order of arguments
-mkTrace :: Maybe String -> Maybe Mode -> Maybe Marker -> Type -> [Double] -> [Double] -> [Double] -> Trace
-
--- | Heatmap Trace constructor
-mkTraceH :: ColorScale -> Bool -> Bool -> [String] -> [String] -> [[Double]] -> TraceH
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Margin
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.Margin
-instance GHC.Generics.Generic Graphics.Plotly.Internal.Margin
-instance GHC.Show.Show Graphics.Plotly.Internal.Margin
-instance GHC.Classes.Eq Graphics.Plotly.Internal.Margin
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.AxisType
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.AxisType
-instance GHC.Generics.Generic Graphics.Plotly.Internal.AxisType
-instance GHC.Show.Show Graphics.Plotly.Internal.AxisType
-instance GHC.Classes.Eq Graphics.Plotly.Internal.AxisType
-instance GHC.Generics.Generic Graphics.Plotly.Internal.Axis
-instance GHC.Show.Show Graphics.Plotly.Internal.Axis
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Type
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.Type
-instance GHC.Generics.Generic Graphics.Plotly.Internal.Type
-instance GHC.Classes.Eq Graphics.Plotly.Internal.Type
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Mode
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.Mode
-instance GHC.Generics.Generic Graphics.Plotly.Internal.Mode
-instance GHC.Classes.Eq Graphics.Plotly.Internal.Mode
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Symbol
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.Symbol
-instance GHC.Generics.Generic Graphics.Plotly.Internal.Symbol
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Marker
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.Marker
-instance GHC.Generics.Generic Graphics.Plotly.Internal.Marker
-instance GHC.Show.Show Graphics.Plotly.Internal.Marker
-instance GHC.Show.Show Graphics.Plotly.Internal.Trace
-instance GHC.Generics.Generic Graphics.Plotly.Internal.Trace
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.ColorScale
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.ColorScale
-instance GHC.Generics.Generic Graphics.Plotly.Internal.ColorScale
-instance GHC.Show.Show Graphics.Plotly.Internal.ColorScale
-instance GHC.Classes.Eq Graphics.Plotly.Internal.ColorScale
-instance GHC.Show.Show Graphics.Plotly.Internal.TraceH
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.BarMode
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.BarMode
-instance GHC.Generics.Generic Graphics.Plotly.Internal.BarMode
-instance GHC.Classes.Eq Graphics.Plotly.Internal.BarMode
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Layout
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.Layout
-instance GHC.Generics.Generic Graphics.Plotly.Internal.Layout
-instance GHC.Show.Show Graphics.Plotly.Internal.Layout
-instance GHC.Show.Show Graphics.Plotly.Internal.PlotConfig
-instance GHC.Show.Show Graphics.Plotly.Internal.BarMode
-instance GHC.Read.Read Graphics.Plotly.Internal.BarMode
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.TraceH
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.TraceH
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.Trace
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Trace
-instance GHC.Show.Show Graphics.Plotly.Internal.Symbol
-instance GHC.Read.Read Graphics.Plotly.Internal.Symbol
-instance GHC.Show.Show Graphics.Plotly.Internal.Mode
-instance GHC.Read.Read Graphics.Plotly.Internal.Mode
-instance GHC.Show.Show Graphics.Plotly.Internal.Type
-instance GHC.Read.Read Graphics.Plotly.Internal.Type
-instance Data.Aeson.Types.FromJSON.FromJSON Graphics.Plotly.Internal.Axis
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Axis
+-- | Config to Layout
+fromConfig :: PlotConfig -> Layout
+instance GHC.Show.Show Graphics.Plotly.Default.PlotConfig
 
 
 -- | Plotly Plots in Haskell
@@ -382,6 +457,21 @@ heatmap :: [String] -> [String] -> [[Double]] -> PlotConfig -> Script
 
 -- | 3D Scatter Plot
 scatter3d :: [String] -> [[Double]] -> [[Double]] -> [[Double]] -> PlotConfig -> Script
+
+-- | 3D Surface Plot where X and Y are indices
+surface'' :: [String] -> [[[Double]]] -> PlotConfig -> Script
+
+-- | 3D Surface Plot with same xs and ys for all zs
+surface' :: [String] -> [Double] -> [Double] -> [[[Double]]] -> PlotConfig -> Script
+
+-- | 3D Surface Plot
+surface :: [String] -> [[Double]] -> [[Double]] -> [[[Double]]] -> PlotConfig -> Script
+
+-- | Parallel Coordinate Plot without line gradient
+parcoord' :: [String] -> [[Double]] -> PlotConfig -> Script
+
+-- | Parallel Coordinate Plot with line gradient
+parcoord :: [Double] -> [String] -> [[Double]] -> PlotConfig -> Script
 
 -- | Internal Type Alias
 type Script = ByteString
@@ -415,6 +505,9 @@ Scatter3D :: Type
 
 -- | 3D Surface
 Surface :: Type
+
+-- | Parallel Coordinate Plot
+ParCoords :: Type
 
 -- | Layout for Plots
 data Layout
@@ -509,9 +602,25 @@ Square :: Symbol
 SquareOpen :: Symbol
 X :: Symbol
 
+-- | Parallel Coordinate Lines
+data Line
+Line :: !Maybe Bool -> !Maybe Bool -> !Maybe ColorScale -> ![Double] -> Line
+
+-- | Show Color Bar
+[$sel:showscale:Line] :: Line -> !Maybe Bool
+
+-- | Reverse the Color Scale
+[$sel:reversescale:Line] :: Line -> !Maybe Bool
+
+-- | Color Scale
+[$sel:colorscale:Line] :: Line -> !Maybe ColorScale
+
+-- | Values represnting the color
+[$sel:color:Line] :: Line -> ![Double]
+
 -- | Trace Independent Plot Config
 data PlotConfig
-PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMode -> !Mode -> !ColorScale -> !Bool -> !Int -> !Int -> !Margin -> !Marker -> PlotConfig
+PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMode -> !Mode -> !ColorScale -> !Bool -> !Bool -> !Bool -> !Int -> !Int -> !Margin -> !Marker -> PlotConfig
 
 -- | Plot Title (default "")
 [$sel:title':PlotConfig] :: PlotConfig -> !String
@@ -537,6 +646,12 @@ PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMod
 -- | Color Scale for 3D (default Viridis)
 [$sel:colorScale:PlotConfig] :: PlotConfig -> !ColorScale
 
+-- | Show Color Bar (default True)
+[$sel:showScale:PlotConfig] :: PlotConfig -> !Bool
+
+-- | Reverse the color scale (default False)
+[$sel:reverseScale:PlotConfig] :: PlotConfig -> !Bool
+
 -- | Show Legend (default True)
 [$sel:legend:PlotConfig] :: PlotConfig -> !Bool
 
@@ -546,7 +661,7 @@ PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMod
 -- | Canvas Width in Pixels (default 800)
 [$sel:width:PlotConfig] :: PlotConfig -> !Int
 
--- | Layout margin (default 0 0 0 0)
+-- | Layout margin (default 66 66 66 66)
 [$sel:margin:PlotConfig] :: PlotConfig -> !Margin
 
 -- | Marker (default 0.5 Circle 1.0)
@@ -554,3 +669,27 @@ PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMod
 
 -- | Default <tt>PlotConfig</tt>
 defaultConfig :: PlotConfig
+
+
+-- | Examples for using plotly-hs
+module Graphics.Plotly.Example
+
+-- | Put All plots in the plots directory
+plotPath :: String -> FilePath
+
+-- | 2D Scatter Plot as seen here:
+--   <a>https://plotly.com/javascript/line-charts/#basic-line-plot</a>
+scatterExample :: IO ()
+
+-- | Histogram / Bar chart Example
+histExample :: IO ()
+heatmapExample :: IO ()
+
+-- | 3D Scatter Plot Example
+scatter3dExample :: IO ()
+
+-- | 3D Surface Plot Example
+surfaceExample :: IO ()
+
+-- | Parallel Coordinate Plot Example
+parcoordsExample :: IO ()

@@ -27,6 +27,7 @@ library
   exposed-modules:
       Graphics.Plotly
       Graphics.Plotly.Default
+      Graphics.Plotly.Example
       Graphics.Plotly.Internal
   other-modules:
       Paths_plotly_hs

@@ -108,16 +108,14 @@ surface'' ns = surface' ns [] []
 parcoord :: [Double] -> [String] -> [[Double]] -> PlotConfig -> Script
 parcoord cs ns vs cfg@PlotConfig{..} = toScript layout traces
   where
-    layout   = Just . fromConfig
-             $ (cfg { margin = Margin 66 66 66 66 } :: PlotConfig)
+    layout   = Just $ fromConfig cfg
     traces   = [mkTraceP colorScale showScale reverseScale cs ns vs]
 
 -- | Parallel Coordinate Plot without line gradient
 parcoord' :: [String] -> [[Double]] -> PlotConfig -> Script
-parcoord' ns vs cfg = toScript layout traces
+parcoord' ns vs cfg@PlotConfig{..} = toScript layout traces
   where
-    layout   = Just . fromConfig
-             $ (cfg { margin = Margin 66 66 66 66 } :: PlotConfig)
+    layout   = Just $ fromConfig cfg 
     traces   = [mkTraceP' ns vs]
 
 -- | Save Plot to HTML File
