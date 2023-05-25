@@ -35,5 +35,5 @@ Add this to `stack.yaml`:
 ```yaml
 extra-deps:
   - github: AugustUnderground/plotly-hs
-    commit: 8cf30ce82ede0b5f70944950a6c8aae3ca18bee4 # Or lates commit
+    commit: 62951b8991d991ff46967e3dd0742bcd9c89bdac
 ```
