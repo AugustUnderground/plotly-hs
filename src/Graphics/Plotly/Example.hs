@@ -29,8 +29,8 @@ histExample = do
     x1 <- replicateM 100 (randomRIO (0, 5) ) :: IO [Double]
     x2 <- replicateM 100 (randomRIO (0, 5) ) :: IO [Double]
     x3 <- replicateM 100 (randomRIO (0, 5) ) :: IO [Double]
-    let histPlot = hist ["x1", "x2", "x3"] [x1,x2,x3]
-                 $ defaultConfig {title' = "Plot Title"}
+    let histPlot = histogram ["x1", "x2", "x3"] [x1,x2,x3]
+                 $ defaultConfig {title' = "A Histogram of Random Data"}
     plot (plotPath "hist") histPlot
 
 -- Heatmap Plot as seen here:

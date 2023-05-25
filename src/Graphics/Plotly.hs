@@ -5,7 +5,7 @@
 {-# LANGUAGE DuplicateRecordFields #-}
 
 -- | Plotly Plots in Haskell
-module Graphics.Plotly ( plot, scatter', scatter, hist, heatmap
+module Graphics.Plotly ( plot, scatter', scatter, histogram, heatmap
                        , scatter3d, surface'', surface', surface
                        , parcoord', parcoord
                        , Script, Mode (..), Type (..), Layout (..), BarMode (..)
@@ -29,7 +29,7 @@ scatter' ns xs ys cfg@PlotConfig{..} = toScript layout traces
     z'          = []
     layout      = Just $ fromConfig cfg
     traces      = zipWith3 mt ns xs ys
-    mt n' x' y' = mkTrace (Just n') (Just lineMode) (Just marker) Scatter x' y' z'
+    mt n' x' y' = mkTrace (Just n') (Just lineMode) (Just marker) Scatter barMode bins x' y' z'
 
 -- | Scatter Plot with same x axis for all ys
 scatter :: [String]   -- ^ Trace Names
@@ -42,14 +42,14 @@ scatter ns x ys cfg = scatter' ns xs ys cfg
     xs = replicate (length ys) x
 
 -- | Histogram Plot
-hist :: [String]    -- ^ Trace Names
-     -> [[Double]]  -- ^ Traces
-     -> PlotConfig  -- ^ Plot Config
-     -> Script      -- ^ Plotly Script
-hist ns xs cfg = toScript layout traces
+histogram :: [String]    -- ^ Trace Names
+          -> [[Double]]  -- ^ Traces
+          -> PlotConfig  -- ^ Plot Config
+          -> Script      -- ^ Plotly Script
+histogram ns xs cfg@PlotConfig{..} = toScript layout traces
   where
     layout = Just $ fromConfig cfg
-    traces = zipWith (\ns' xs' -> mkTrace (Just ns') Nothing Nothing Histogram xs' [] []) ns xs
+    traces = zipWith (\ns' xs' -> mkTrace (Just ns') Nothing Nothing Histogram barMode bins xs' [] []) ns xs
 
 -- | Heatmap Plot
 heatmap :: [String]   -- ^ X Categories
@@ -73,7 +73,7 @@ scatter3d ns xs ys zs cfg@PlotConfig{..} = toScript layout traces
   where
     layout         = Just $ fromConfig cfg
     traces         = zipWith4 mt ns xs ys zs
-    mt n' x' y' z' = mkTrace (Just n') (Just lineMode) (Just marker) Scatter3D x' y' z'
+    mt n' x' y' z' = mkTrace (Just n') (Just lineMode) (Just marker) Scatter3D barMode bins x' y' z'
 
 -- | 3D Surface Plot
 surface :: [String]     -- ^ Trace Names

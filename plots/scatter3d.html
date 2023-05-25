@@ -4,9 +4,9 @@
 <body>
 <div id="plotDiv"></div>
 <script>
-var trace0 = {"z":[30,60,1,-10,20],"mode":"markers","name":"point cloud","type":"scatter3d","y":[20,1,60,80,30],"x":[1,0,30,50,1]};
+var trace0 = {"z":[30,60,1,-10,20],"mode":"markers","name":"point cloud","type":"scatter3d","y":[20,1,60,80,30],"marker":{"size":0.1,"symbol":"circle","opacity":1},"x":[1,0,30,50,1]};
 var data = [trace0];
-var layout = {"height":800,"title":"","showlegend":true,"yaxis":{"zeroline":true,"showgrid":true,"title":"","type":"Linear"},"xaxis":{"zeroline":true,"showgrid":true,"title":"","type":"Linear"},"width":800,"margin":{"l":66,"t":66,"b":66,"r":66},"barmode":null};
+var layout = {"height":800,"title":"","showlegend":true,"yaxis":{"zeroline":true,"showgrid":true,"title":"","type":"Linear"},"xaxis":{"zeroline":true,"showgrid":true,"title":"","type":"Linear"},"width":800,"margin":{"l":66,"t":66,"b":66,"r":66},"barmode":"overlay"};
 Plotly.newPlot('plotDiv', data, layout);
 
 </script>

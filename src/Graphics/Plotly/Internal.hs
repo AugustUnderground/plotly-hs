@@ -88,23 +88,28 @@ data Marker = Marker { size    :: !Double -- ^ Marker Size
                      } deriving (Show, Generic, ToJSON)
 
 -- | Data Trace
-data Trace = Trace { name  :: !(Maybe String)   -- ^ Trace Name
-                   , x     :: !(Maybe [Double]) -- ^ X axis values
-                   , y     :: !(Maybe [Double]) -- ^ Y axis values
-                   , z     :: !(Maybe [Double]) -- ^ Z axis values
-                   , mode  :: !(Maybe Mode)     -- ^ Scatter Mode
-                   , type' :: !Type             -- ^ Plot Type
-                   , marker :: !(Maybe Marker)  -- ^ Marker Configuration
+data Trace = Trace { name    :: !(Maybe String)    -- ^ Trace Name
+                   , x       :: !(Maybe [Double])  -- ^ X axis values
+                   , y       :: !(Maybe [Double])  -- ^ Y axis values
+                   , z       :: !(Maybe [Double])  -- ^ Z axis values
+                   , mode    :: !(Maybe Mode)      -- ^ Scatter Mode
+                   , type'   :: !Type              -- ^ Plot Type
+                   , barmode :: !(Maybe BarMode)   -- ^ Histogram Bar Mode
+                   , xbins   :: !(Maybe XBins)     -- ^ Histogram Bins 
+                   , marker  :: !(Maybe Marker)    -- ^ Marker Configuration
                    } deriving (Generic, Show)
 
 instance ToJSON Trace where
   toJSON Trace{..} = object
-                   $ omitNulls [ "name"   .= name
-                               , "x"      .= x
-                               , "y"      .= y
-                               , "z"      .= z
-                               , "mode"   .= mode
-                               , "type"   .= type' ]
+                   $ omitNulls [ "name"    .= name
+                               , "x"       .= x
+                               , "y"       .= y
+                               , "z"       .= z
+                               , "mode"    .= mode
+                               , "type"    .= type'
+                               , "marker"  .= marker
+                               , "barmode" .= barmode 
+                               , "xbins"   .= xbins ]
 
 -- | Heatmap Trace
 data TraceH = TraceH { z           :: ![[Double]]         -- ^ Data Matrix
@@ -243,6 +248,12 @@ instance ToJSON BarMode where
   toJSON Overlay  = "overlay"
   toJSON Relative = "relative"
 
+-- | Bins in Histogram
+data XBins = XBins { size  :: !Double           -- ^ Size of Bins
+                   , start :: !(Maybe Double)   -- ^ Start of Bins
+                   , end   :: !(Maybe Double)   -- ^ End of Bins
+                   } deriving (Show, Generic, ToJSON)
+
 -- | Generates line for @data@ variable for @N@ traces
 traceData :: Int -> Script
 traceData num = BL.concat [ "var data = [", ids, "];" ]
@@ -265,10 +276,12 @@ toScript layout traces = C8.unlines $ ls ++ [ds, lay, "Plotly.newPlot('plotDiv',
     lay = BL.concat ["var layout = ", encode layout, ";"]
 
 -- | Trace contructor, different order of arguments
-mkTrace :: Maybe String -> Maybe Mode -> Maybe Marker -> Type
-        -> [Double] -> [Double] -> [Double] -> Trace
-mkTrace n m m' t xs ys zs = Trace n xs' ys' zs' m t m'
+mkTrace :: Maybe String -> Maybe Mode -> Maybe Marker -> Type -> BarMode
+        -> XBins -> [Double] -> [Double] -> [Double] -> Trace
+mkTrace n m m' t b s xs ys zs = Trace n xs' ys' zs' m t bm' bs' m'
   where
+    bs' = if t == Histogram then Just s else Nothing
+    bm' = if t == Histogram then Just b else Nothing
     xs' = if null xs then Nothing else Just xs
     ys' = if null ys then Nothing else Just ys
     zs' = if null zs then Nothing else Just zs

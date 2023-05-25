@@ -129,7 +129,7 @@ Marker :: !Double -> !Symbol -> !Double -> Marker
 
 -- | Data Trace
 data Trace
-Trace :: !Maybe String -> !Maybe [Double] -> !Maybe [Double] -> !Maybe [Double] -> !Maybe Mode -> !Type -> !Maybe Marker -> Trace
+Trace :: !Maybe String -> !Maybe [Double] -> !Maybe [Double] -> !Maybe [Double] -> !Maybe Mode -> !Type -> !Maybe BarMode -> !Maybe XBins -> !Maybe Marker -> Trace
 
 -- | Trace Name
 [$sel:name:Trace] :: Trace -> !Maybe String
@@ -148,6 +148,12 @@ Trace :: !Maybe String -> !Maybe [Double] -> !Maybe [Double] -> !Maybe [Double] 
 
 -- | Plot Type
 [$sel:type':Trace] :: Trace -> !Type
+
+-- | Histogram Bar Mode
+[$sel:barmode:Trace] :: Trace -> !Maybe BarMode
+
+-- | Histogram Bins
+[$sel:xbins:Trace] :: Trace -> !Maybe XBins
 
 -- | Marker Configuration
 [$sel:marker:Trace] :: Trace -> !Maybe Marker
@@ -299,6 +305,19 @@ Overlay :: BarMode
 -- | Relative
 Relative :: BarMode
 
+-- | Bins in Histogram
+data XBins
+XBins :: !Double -> !Maybe Double -> !Maybe Double -> XBins
+
+-- | Size of Bins
+[$sel:size:XBins] :: XBins -> !Double
+
+-- | Start of Bins
+[$sel:start:XBins] :: XBins -> !Maybe Double
+
+-- | End of Bins
+[$sel:end:XBins] :: XBins -> !Maybe Double
+
 -- | Generates line for <tt>data</tt> variable for <tt>N</tt> traces
 traceData :: Int -> Script
 
@@ -310,7 +329,7 @@ traceLine :: ToJSON a => a -> Int -> ByteString
 toScript :: ToJSON a => Maybe Layout -> [a] -> ByteString
 
 -- | Trace contructor, different order of arguments
-mkTrace :: Maybe String -> Maybe Mode -> Maybe Marker -> Type -> [Double] -> [Double] -> [Double] -> Trace
+mkTrace :: Maybe String -> Maybe Mode -> Maybe Marker -> Type -> BarMode -> XBins -> [Double] -> [Double] -> [Double] -> Trace
 
 -- | Heatmap Trace constructor
 mkTraceH :: ColorScale -> Bool -> Bool -> [String] -> [String] -> [[Double]] -> TraceH
@@ -348,8 +367,6 @@ instance GHC.Classes.Eq Graphics.Plotly.Internal.Symbol
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Marker
 instance GHC.Generics.Generic Graphics.Plotly.Internal.Marker
 instance GHC.Show.Show Graphics.Plotly.Internal.Marker
-instance GHC.Show.Show Graphics.Plotly.Internal.Trace
-instance GHC.Generics.Generic Graphics.Plotly.Internal.Trace
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.ColorScale
 instance GHC.Generics.Generic Graphics.Plotly.Internal.ColorScale
 instance GHC.Show.Show Graphics.Plotly.Internal.ColorScale
@@ -366,11 +383,16 @@ instance GHC.Classes.Eq Graphics.Plotly.Internal.BarMode
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Layout
 instance GHC.Generics.Generic Graphics.Plotly.Internal.Layout
 instance GHC.Show.Show Graphics.Plotly.Internal.Layout
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.XBins
+instance GHC.Generics.Generic Graphics.Plotly.Internal.XBins
+instance GHC.Show.Show Graphics.Plotly.Internal.XBins
+instance GHC.Show.Show Graphics.Plotly.Internal.Trace
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Trace
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Trace
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.BarMode
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.TraceP
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.TraceH
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.TraceS
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Trace
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Symbol
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Mode
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Type
@@ -382,7 +404,7 @@ module Graphics.Plotly.Default
 
 -- | Trace Independent Plot Config
 data PlotConfig
-PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMode -> !Mode -> !ColorScale -> !Bool -> !Bool -> !Bool -> !Int -> !Int -> !Margin -> !Marker -> PlotConfig
+PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMode -> !Mode -> !ColorScale -> !Bool -> !Bool -> !Bool -> !Int -> !Int -> !Margin -> !Marker -> !XBins -> PlotConfig
 
 -- | Plot Title (default "")
 [$sel:title':PlotConfig] :: PlotConfig -> !String
@@ -429,6 +451,9 @@ PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMod
 -- | Marker (default 0.5 Circle 1.0)
 [$sel:marker:PlotConfig] :: PlotConfig -> !Marker
 
+-- | Histogram bins (default 0.05 Nothing Nothing)
+[$sel:bins:PlotConfig] :: PlotConfig -> !XBins
+
 -- | Default <tt>PlotConfig</tt>
 defaultConfig :: PlotConfig
 
@@ -450,7 +475,7 @@ scatter' :: [String] -> [[Double]] -> [[Double]] -> PlotConfig -> Script
 scatter :: [String] -> [Double] -> [[Double]] -> PlotConfig -> Script
 
 -- | Histogram Plot
-hist :: [String] -> [[Double]] -> PlotConfig -> Script
+histogram :: [String] -> [[Double]] -> PlotConfig -> Script
 
 -- | Heatmap Plot
 heatmap :: [String] -> [String] -> [[Double]] -> PlotConfig -> Script
@@ -620,7 +645,7 @@ Line :: !Maybe Bool -> !Maybe Bool -> !Maybe ColorScale -> ![Double] -> Line
 
 -- | Trace Independent Plot Config
 data PlotConfig
-PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMode -> !Mode -> !ColorScale -> !Bool -> !Bool -> !Bool -> !Int -> !Int -> !Margin -> !Marker -> PlotConfig
+PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMode -> !Mode -> !ColorScale -> !Bool -> !Bool -> !Bool -> !Int -> !Int -> !Margin -> !Marker -> !XBins -> PlotConfig
 
 -- | Plot Title (default "")
 [$sel:title':PlotConfig] :: PlotConfig -> !String
@@ -666,6 +691,9 @@ PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMod
 
 -- | Marker (default 0.5 Circle 1.0)
 [$sel:marker:PlotConfig] :: PlotConfig -> !Marker
+
+-- | Histogram bins (default 0.05 Nothing Nothing)
+[$sel:bins:PlotConfig] :: PlotConfig -> !XBins
 
 -- | Default <tt>PlotConfig</tt>
 defaultConfig :: PlotConfig
