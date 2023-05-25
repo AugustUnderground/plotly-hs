@@ -20,16 +20,16 @@ import           Graphics.Plotly.Default
 
 -- | Scatter Plot with individual x values per trace
 scatter' :: [String]  -- ^ Trace Names
-        -> [[Double]] -- ^ xs
-        -> [[Double]] -- ^ ys
-        -> PlotConfig -- ^ Plot Config
-        -> Script     -- ^ Plotly Script
+         -> [[Double]] -- ^ xs
+         -> [[Double]] -- ^ ys
+         -> PlotConfig -- ^ Plot Config
+         -> Script     -- ^ Plotly Script
 scatter' ns xs ys cfg@PlotConfig{..} = toScript layout traces
   where
     z'          = []
     layout      = Just $ fromConfig cfg
-    traces      = zipWith3 mt ns xs ys
-    mt n' x' y' = mkTrace (Just n') (Just lineMode) (Just marker) Scatter barMode bins x' y' z'
+    traces      = if null ns then zipWith (mt Nothing) xs ys else zipWith3 mt (map Just ns) xs ys
+    mt n' x' y' = mkTrace n' (Just lineMode) (Just marker) Scatter barMode bins x' y' z'
 
 -- | Scatter Plot with same x axis for all ys
 scatter :: [String]   -- ^ Trace Names
