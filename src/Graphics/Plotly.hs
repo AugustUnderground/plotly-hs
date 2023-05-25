@@ -113,7 +113,7 @@ parcoord cs ns vs cfg@PlotConfig{..} = toScript layout traces
 
 -- | Parallel Coordinate Plot without line gradient
 parcoord' :: [String] -> [[Double]] -> PlotConfig -> Script
-parcoord' ns vs cfg@PlotConfig{..} = toScript layout traces
+parcoord' ns vs cfg = toScript layout traces
   where
     layout   = Just $ fromConfig cfg 
     traces   = [mkTraceP' ns vs]
