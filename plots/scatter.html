@@ -1,0 +1,14 @@
+<head>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<div id="plotDiv"></div>
+<script>
+var trace0 = {"mode":"lines+markers","name":"foo","type":"scatter","y":[10,15,13,17],"x":[1,2,3,4]};
+var trace1 = {"mode":"lines+markers","name":"bar","type":"scatter","y":[16,5,11,9],"x":[1,2,3,4]};
+var data = [trace0,trace1];
+var layout = {"height":800,"title":"","showlegend":true,"yaxis":{"zeroline":true,"showgrid":true,"title":"","type":"Linear"},"xaxis":{"zeroline":true,"showgrid":true,"title":"","type":"Linear"},"width":800,"margin":{"l":66,"t":66,"b":66,"r":66},"barmode":null};
+Plotly.newPlot('plotDiv', data, layout);
+
+</script>
+</body>

@@ -1,0 +1,13 @@
+<head>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<div id="plotDiv"></div>
+<script>
+var trace0 = {"z":[[1,0,30,50,1],[20,1,60,80,30],[30,60,1,-10,20]],"showscale":true,"colorscale":"Viridis","type":"heatmap","y":["Morning","Afternoon","Evening"],"hoverongaps":true,"x":["Monday","Tuesday","Wednesday","Thursday","Friday"]};
+var data = [trace0];
+var layout = {"height":800,"title":"","showlegend":true,"yaxis":{"zeroline":true,"showgrid":true,"title":"","type":"Linear"},"xaxis":{"zeroline":true,"showgrid":true,"title":"","type":"Linear"},"width":800,"margin":{"l":66,"t":66,"b":66,"r":66},"barmode":null};
+Plotly.newPlot('plotDiv', data, layout);
+
+</script>
+</body>
