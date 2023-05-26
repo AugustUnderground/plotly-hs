@@ -643,6 +643,22 @@ Line :: !Maybe Bool -> !Maybe Bool -> !Maybe ColorScale -> ![Double] -> Line
 -- | Values represnting the color
 [$sel:color:Line] :: Line -> ![Double]
 
+-- | Layout Margins
+data Margin
+Margin :: !Int -> !Int -> !Int -> !Int -> Margin
+
+-- | Left Margin
+[$sel:l:Margin] :: Margin -> !Int
+
+-- | Right Margin
+[$sel:r:Margin] :: Margin -> !Int
+
+-- | Bottom Margin
+[$sel:b:Margin] :: Margin -> !Int
+
+-- | Top Margin
+[$sel:t:Margin] :: Margin -> !Int
+
 -- | Trace Independent Plot Config
 data PlotConfig
 PlotConfig :: !String -> !String -> !String -> !AxisType -> !AxisType -> !BarMode -> !Mode -> !ColorScale -> !Bool -> !Bool -> !Bool -> !Int -> !Int -> !Margin -> !Marker -> !XBins -> PlotConfig
