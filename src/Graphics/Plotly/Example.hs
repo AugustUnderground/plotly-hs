@@ -87,7 +87,7 @@ parcoordsExample = plot (plotPath "parcoords1") parPlot'
     cs = [2,4,6,8]
     ds = [-3,-5,-10,-7]
     c' = [0.2,0.4,0.6,0.8]
-    parPlot' = parcoord' ["A", "B", "C", "D"] [as,bs,cs,ds]
+    parPlot' = parcoord' ["A", "B", "C", "D"] [[as,bs,cs,ds], [bs,ds,as,cs]]
              $ defaultConfig {width = 1500, height = 600}
-    parPlot  = parcoord c' ["A", "B", "C", "D"] [as,bs,cs,ds]
+    parPlot  = parcoord c' ["A", "B", "C", "D"] [[as,bs,cs,ds], [bs,ds,as,cs]]
              $ defaultConfig {width = 1500, height = 600}

@@ -14,6 +14,9 @@ module Graphics.Plotly.Internal
 -- | Thanks Alan Zimmerman <a>https://gist.github.com/alanz/2465584</a>
 omitNulls :: [Pair] -> [Pair]
 
+-- | Prepend Color Column to Parallel Coordinate Plot
+prependColor :: [[Double]] -> Int -> [[Double]]
+
 -- | Internal Type Alias
 type Script = ByteString
 
@@ -338,10 +341,10 @@ mkTraceH :: ColorScale -> Bool -> Bool -> [String] -> [String] -> [[Double]] -> 
 mkTraceS :: Maybe String -> ColorScale -> [Double] -> [Double] -> [[Double]] -> TraceS
 
 -- | Parallel Coordinate Trace Constructor
-mkTraceP :: ColorScale -> Bool -> Bool -> [Double] -> [String] -> [[Double]] -> TraceP
+mkTraceP :: ColorScale -> Bool -> Bool -> [Double] -> [String] -> [[[Double]]] -> TraceP
 
 -- | Parallel Coordinate Trace Constructor without Line configuration
-mkTraceP' :: [String] -> [[Double]] -> TraceP
+mkTraceP' :: [String] -> [[[Double]]] -> TraceP
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Margin
 instance GHC.Generics.Generic Graphics.Plotly.Internal.Margin
 instance GHC.Show.Show Graphics.Plotly.Internal.Margin
@@ -493,10 +496,10 @@ surface' :: [String] -> [Double] -> [Double] -> [[[Double]]] -> PlotConfig -> Sc
 surface :: [String] -> [[Double]] -> [[Double]] -> [[[Double]]] -> PlotConfig -> Script
 
 -- | Parallel Coordinate Plot without line gradient
-parcoord' :: [String] -> [[Double]] -> PlotConfig -> Script
+parcoord' :: [String] -> [[[Double]]] -> PlotConfig -> Script
 
 -- | Parallel Coordinate Plot with line gradient
-parcoord :: [Double] -> [String] -> [[Double]] -> PlotConfig -> Script
+parcoord :: [Double] -> [String] -> [[[Double]]] -> PlotConfig -> Script
 
 -- | Internal Type Alias
 type Script = ByteString

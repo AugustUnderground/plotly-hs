@@ -81,7 +81,7 @@ surface :: [String]     -- ^ Trace Names
         -> [[Double]]   -- ^ ys
         -> [[[Double]]] -- ^ zs
         -> PlotConfig   -- ^ P
-        -> Script       -- ^ Trace Names
+        -> Script       -- ^ Trace
 surface ns xs ys zs cfg@PlotConfig{..} = toScript layout traces
   where
     layout   = Just $ fromConfig cfg
@@ -93,31 +93,40 @@ surface' :: [String]     -- ^ Trace Names
          -> [Double]     -- ^ xs
          -> [Double]     -- ys
          -> [[[Double]]] -- ^ zs
-         -> PlotConfig   -- ^ P
-         -> Script       -- ^ Trace Names
+         -> PlotConfig   -- ^ Plot Config
+         -> Script       -- ^ Plotly Script
 surface' ns xs ys = surface ns (repeat xs) (repeat ys)
 
 -- | 3D Surface Plot where X and Y are indices
-surface'' :: [String]     -- ^ Trace Names
+surface'' :: [String]    -- ^ Trace Names
          -> [[[Double]]] -- ^ zs
-         -> PlotConfig   -- ^ P
-         -> Script       -- ^ Trace Names
+         -> PlotConfig   -- ^ Plot Config
+         -> Script       -- ^ Ploty Script
 surface'' ns = surface' ns [] []
 
 -- | Parallel Coordinate Plot with line gradient
-parcoord :: [Double] -> [String] -> [[Double]] -> PlotConfig -> Script
+parcoord :: [Double]     -- ^ Color column
+         -> [String]     -- ^ Axis Labels
+         -> [[[Double]]] -- ^ traces ( rows ( values ) )
+         -> PlotConfig   -- ^ Plot Config
+         -> Script       -- ^ Plotly Script
 parcoord cs ns vs cfg@PlotConfig{..} = toScript layout traces
   where
     layout   = Just $ fromConfig cfg
     traces   = [mkTraceP colorScale showScale reverseScale cs ns vs]
 
 -- | Parallel Coordinate Plot without line gradient
-parcoord' :: [String] -> [[Double]] -> PlotConfig -> Script
+parcoord' :: [String]     -- ^ Axis Names
+          -> [[[Double]]] -- ^ traces ( rows ( values ) )
+          -> PlotConfig   -- ^ Plot Config
+          -> Script       -- ^ Plot Script
 parcoord' ns vs cfg = toScript layout traces
   where
     layout   = Just $ fromConfig cfg 
     traces   = [mkTraceP' ns vs]
 
 -- | Save Plot to HTML File
-plot :: FilePath -> Script -> IO ()
+plot :: FilePath -- ^ Target path to .html file
+     -> Script   -- ^ Plotly Script
+     -> IO ()
 plot path = BL.writeFile path . toHtml

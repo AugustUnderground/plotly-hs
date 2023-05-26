@@ -3,6 +3,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE OverloadedStrings #-} 
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE DuplicateRecordFields #-}
@@ -21,6 +22,12 @@ import           Data.ByteString.Lazy             (ByteString)
 -- https://gist.github.com/alanz/2465584
 omitNulls :: [Pair] -> [Pair]
 omitNulls = filter ((/= Null) . snd)
+
+-- | Prepend Color Column to Parallel Coordinate Plot
+prependColor :: [[Double]] -> Int -> [[Double]]
+prependColor ds i = is : ds
+  where
+    is = replicate (length $ head ds) $ realToFrac i
 
 -- | Internal Type Alias
 type Script = ByteString
@@ -301,14 +308,20 @@ mkTraceS ns cs xs ys zs = TraceS ns zs xs' ys' Surface (Just cs)
     xs' = if null xs then Nothing else Just xs
 
 -- | Parallel Coordinate Trace Constructor
-mkTraceP :: ColorScale -> Bool -> Bool -> [Double] -> [String] -> [[Double]] -> TraceP
+mkTraceP :: ColorScale -> Bool -> Bool -> [Double] -> [String] -> [[[Double]]] -> TraceP
 mkTraceP scale show' rev' colors labels ds = TraceP ParCoords (Just line) dims
   where
     line = Line (Just show') (Just rev') (Just scale) colors
-    dims = zipWith (Dimension Nothing) labels ds
+    ds'  = foldl1 (zipWith (++)) ds
+    dims = zipWith (Dimension Nothing) labels ds'
 
 -- | Parallel Coordinate Trace Constructor without Line configuration
-mkTraceP' :: [String] -> [[Double]] -> TraceP
-mkTraceP' labels ds = TraceP ParCoords Nothing dims
+mkTraceP' :: [String] -> [[[Double]]] -> TraceP
+mkTraceP' labels ds = TraceP ParCoords (Just line) dims
   where
-    dims = zipWith (Dimension Nothing) labels ds
+    num    = realToFrac $ length ds
+    len    = length . head $ head ds
+    colors = foldl1 (++) $ map (replicate len) [1.0 .. num]
+    line   = Line (Just False) (Just False) Nothing colors
+    ds'    = foldl1 (zipWith (++)) ds
+    dims   = zipWith (Dimension Nothing) labels ds'
