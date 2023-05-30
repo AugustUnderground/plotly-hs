@@ -11,6 +11,7 @@
 -- | Internal Functions and Types for Plotly Plots in Haskell
 module Graphics.Plotly.Internal where
 
+import           Data.List                        (nub)
 import           Data.Aeson
 import           Data.Aeson.Types
 import           GHC.Generics
@@ -85,8 +86,17 @@ instance ToJSON Axis where
 data Line = Line { showscale    :: !(Maybe Bool)       -- ^ Show Color Bar
                  , reversescale :: !(Maybe Bool)       -- ^ Reverse the Color Scale
                  , colorscale   :: !(Maybe ColorScale) -- ^ Color Scale
-                 , color        :: ![Double]           -- ^ Values represnting the color
-                 } deriving (Show, Generic, ToJSON)
+                 , colormap     :: !(Maybe ColorMap)   -- ^ Color Map
+                 , color        :: !(Maybe [Double])   -- ^ Values represnting the color
+                 } deriving (Show, Generic)
+
+instance ToJSON Line where
+  toJSON Line{..} = object
+                  $ omitNulls [ "showscale"    .= showscale
+                              , "color"        .= color
+                              , "reversescale" .= reversescale
+                              , "colorscale"   .= colormap
+                              , "colorscale"   .= colorscale ]
 
 -- | Marker Config
 data Marker = Marker { size    :: !Double -- ^ Marker Size
@@ -222,7 +232,8 @@ instance ToJSON Symbol where
   toJSON X           = "x"
 
 -- | Color scales for Heamap / 3D Plots
-data ColorScale = Blackbody
+data ColorScale = Discrete
+                | Blackbody
                 | Bluered
                 | Blues
                 | Cividis
@@ -241,6 +252,50 @@ data ColorScale = Blackbody
                 | YlGnBu
                 | YlOrRd
   deriving (Eq, Show, Generic, ToJSON)
+
+-- | Some Color Strings
+data Color = Red
+           | Green
+           | Blue
+           | Yellow
+           | Magenta
+           | Cyan
+           | Black
+           | Gray
+           | White
+            deriving (Enum, Eq, Generic)
+
+instance Show Color where
+  show Red     = "red"
+  show Green   = "green"
+  show Blue    = "blue"
+  show Yellow  = "yellow"
+  show Magenta = "magenta"
+  show Cyan    = "cyan"
+  show Black   = "black"
+  show Gray    = "gray"
+  show White   = "white"
+
+instance ToJSON Color where
+  toJSON Red     = "red"
+  toJSON Green   = "green"
+  toJSON Blue    = "blue"
+  toJSON Yellow  = "yellow"
+  toJSON Magenta = "magenta"
+  toJSON Cyan    = "cyan"
+  toJSON Black   = "black"
+  toJSON Gray    = "gray"
+  toJSON White   = "white"
+
+-- | Type alias for mapping a color
+data ColorMapping = ColorMapping !Double !Color
+    deriving (Generic, ToJSON)
+
+instance Show ColorMapping where
+  show (ColorMapping n c) = "[" ++ show n ++ ", \"" ++ show c ++ "\"]"
+
+-- | Type alias for a list of color mappings
+type ColorMap = [ColorMapping]
 
 -- | Bar Layout
 data BarMode = Stack    -- ^ Stacked
@@ -311,7 +366,9 @@ mkTraceS ns cs xs ys zs = TraceS ns zs xs' ys' Surface (Just cs)
 mkTraceP :: ColorScale -> Bool -> Bool -> [Double] -> [String] -> [[[Double]]] -> TraceP
 mkTraceP scale show' rev' colors labels ds = TraceP ParCoords (Just line) dims
   where
-    line = Line (Just show') (Just rev') (Just scale) colors
+    mapping = zipWith ColorMapping (nub colors) [ Red .. ]
+    line = if scale == Discrete then Line (Just show') (Just rev') Nothing (Just mapping) (Just colors)
+                                else Line (Just show') (Just rev') (Just scale) Nothing (Just colors)
     ds'  = foldl1 (zipWith (++)) ds
     dims = zipWith (Dimension Nothing) labels ds'
 
@@ -321,7 +378,8 @@ mkTraceP' labels ds = TraceP ParCoords (Just line) dims
   where
     num    = realToFrac $ length ds
     len    = length . head $ head ds
-    colors = foldl1 (++) $ map (replicate len) [1.0 .. num]
-    line   = Line (Just False) (Just False) Nothing colors
+    colors = if length ds > 1 then Just . foldl1 (++) $ map (replicate len) [1.0 .. num]
+                              else Nothing
+    line   = Line (Just False) (Just False) Nothing Nothing colors
     ds'    = foldl1 (zipWith (++)) ds
     dims   = zipWith (Dimension Nothing) labels ds'

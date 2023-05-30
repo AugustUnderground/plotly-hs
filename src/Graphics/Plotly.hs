@@ -7,10 +7,11 @@
 -- | Plotly Plots in Haskell
 module Graphics.Plotly ( plot, scatter', scatter, histogram, heatmap
                        , scatter3d, surface'', surface', surface
-                       , parcoord', parcoord
+                       , parcoord'', parcoord', parcoord
                        , Script, Mode (..), Type (..), Layout (..), BarMode (..)
-                       , AxisType (..), ColorScale (..), Symbol (..), Line (..)
-                       , Margin (..), PlotConfig (..), defaultConfig
+                       , AxisType (..), Color (..), ColorMap, ColorScale (..)
+                       , Symbol (..), Line (..), Margin (..), PlotConfig (..)
+                       , defaultConfig
                        ) where
 
 import           Data.List                      (zipWith4)
@@ -115,12 +116,23 @@ parcoord cs ns vs cfg@PlotConfig{..} = toScript layout traces
     layout   = Just $ fromConfig cfg
     traces   = [mkTraceP colorScale showScale reverseScale cs ns vs]
 
--- | Parallel Coordinate Plot without line gradient
-parcoord' :: [String]     -- ^ Axis Names
+-- | Parallel Coordinate Plot with discrete line colors
+parcoord' :: [Double]     -- ^ Color column
+          -> [String]     -- ^ Axis Labels
           -> [[[Double]]] -- ^ traces ( rows ( values ) )
           -> PlotConfig   -- ^ Plot Config
-          -> Script       -- ^ Plot Script
-parcoord' ns vs cfg = toScript layout traces
+          -> Script       -- ^ Plotly Script
+parcoord' cs ns vs cfg@PlotConfig{..} = toScript layout traces
+  where
+    layout   = Just $ fromConfig cfg
+    traces   = [mkTraceP colorScale False False cs ns vs]
+
+-- | Parallel Coordinate Plot without line gradient
+parcoord'' :: [String]     -- ^ Axis Names
+           -> [[[Double]]] -- ^ traces ( rows ( values ) )
+           -> PlotConfig   -- ^ Plot Config
+           -> Script       -- ^ Plot Script
+parcoord'' ns vs cfg = toScript layout traces
   where
     layout   = Just $ fromConfig cfg 
     traces   = [mkTraceP' ns vs]
