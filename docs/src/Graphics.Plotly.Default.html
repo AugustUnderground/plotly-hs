@@ -12,7 +12,7 @@
 </span><span id="line-12"></span><span class="hs-comment">-- | Config to Layout</span><span>
 </span><span id="line-13"></span><span class="annot"><a href="Graphics.Plotly.Default.html#fromConfig"><span class="hs-identifier hs-type">fromConfig</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Graphics.Plotly.Default.html#PlotConfig"><span class="hs-identifier hs-type">PlotConfig</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Graphics.Plotly.Internal.html#Layout"><span class="hs-identifier hs-type">Layout</span></a></span><span>
 </span><span id="line-14"></span><span id="fromConfig"><span class="annot"><span class="annottext">fromConfig :: PlotConfig -&gt; Layout
-</span><a href="Graphics.Plotly.Default.html#fromConfig"><span class="hs-identifier hs-var hs-var">fromConfig</span></a></span></span><span> </span><span class="annot"><a href="Graphics.Plotly.Default.html#PlotConfig"><span class="hs-identifier hs-type">PlotConfig</span></a></span><span class="hs-special">{</span><span id="local-6989586621679088444"><span id="local-6989586621679088445"><span id="local-6989586621679088446"><span id="local-6989586621679088447"><span id="local-6989586621679088448"><span id="local-6989586621679088449"><span id="local-6989586621679088450"><span id="local-6989586621679088451"><span id="local-6989586621679088452"><span id="local-6989586621679088453"><span id="local-6989586621679088454"><span id="local-6989586621679088455"><span id="local-6989586621679088456"><span id="local-6989586621679088457"><span id="local-6989586621679088458"><span id="local-6989586621679088459"><span class="annot"><span class="annottext">Bool
+</span><a href="Graphics.Plotly.Default.html#fromConfig"><span class="hs-identifier hs-var hs-var">fromConfig</span></a></span></span><span> </span><span class="annot"><a href="Graphics.Plotly.Default.html#PlotConfig"><span class="hs-identifier hs-type">PlotConfig</span></a></span><span class="hs-special">{</span><span id="local-6989586621679090120"><span id="local-6989586621679090121"><span id="local-6989586621679090122"><span id="local-6989586621679090123"><span id="local-6989586621679090124"><span id="local-6989586621679090125"><span id="local-6989586621679090126"><span id="local-6989586621679090127"><span id="local-6989586621679090128"><span id="local-6989586621679090129"><span id="local-6989586621679090130"><span id="local-6989586621679090131"><span id="local-6989586621679090132"><span id="local-6989586621679090133"><span id="local-6989586621679090134"><span id="local-6989586621679090135"><span class="annot"><span class="annottext">Bool
 Int
 String
 XBins
@@ -55,37 +55,37 @@ ylabel :: String
 xlabel :: String
 title' :: String
 </span><a href="Graphics.Plotly.Default.html#%24sel%3Abins%3APlotConfig"><span class="hs-glyph hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">..</span></a></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Layout
-</span><a href="#local-6989586621679088427"><span class="hs-identifier hs-var">layout</span></a></span><span>
+</span><a href="#local-6989586621679090103"><span class="hs-identifier hs-var">layout</span></a></span><span>
 </span><span id="line-15"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-16"></span><span>    </span><span id="local-6989586621679088426"><span class="annot"><span class="annottext">xaxis :: Maybe Axis
-</span><a href="#local-6989586621679088426"><span class="hs-identifier hs-var hs-var">xaxis</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Axis -&gt; Maybe Axis
+</span><span id="line-16"></span><span>    </span><span id="local-6989586621679090102"><span class="annot"><span class="annottext">xaxis :: Maybe Axis
+</span><a href="#local-6989586621679090102"><span class="hs-identifier hs-var hs-var">xaxis</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Axis -&gt; Maybe Axis
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">(Axis -&gt; Maybe Axis) -&gt; Axis -&gt; Maybe Axis
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Bool -&gt; Bool -&gt; AxisType -&gt; Axis
 </span><a href="Graphics.Plotly.Internal.html#Axis"><span class="hs-identifier hs-var">Axis</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679088458"><span class="hs-identifier hs-var">xlabel</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679090134"><span class="hs-identifier hs-var">xlabel</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span> </span><span class="annot"><span class="annottext">AxisType
-</span><a href="#local-6989586621679088456"><span class="hs-identifier hs-var">xmode</span></a></span><span>
-</span><span id="line-17"></span><span>    </span><span id="local-6989586621679088424"><span class="annot"><span class="annottext">yaxis :: Maybe Axis
-</span><a href="#local-6989586621679088424"><span class="hs-identifier hs-var hs-var">yaxis</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Axis -&gt; Maybe Axis
+</span><a href="#local-6989586621679090132"><span class="hs-identifier hs-var">xmode</span></a></span><span>
+</span><span id="line-17"></span><span>    </span><span id="local-6989586621679090100"><span class="annot"><span class="annottext">yaxis :: Maybe Axis
+</span><a href="#local-6989586621679090100"><span class="hs-identifier hs-var hs-var">yaxis</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Axis -&gt; Maybe Axis
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">(Axis -&gt; Maybe Axis) -&gt; Axis -&gt; Maybe Axis
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Bool -&gt; Bool -&gt; AxisType -&gt; Axis
 </span><a href="Graphics.Plotly.Internal.html#Axis"><span class="hs-identifier hs-var">Axis</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679088457"><span class="hs-identifier hs-var">ylabel</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679090133"><span class="hs-identifier hs-var">ylabel</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span> </span><span class="annot"><span class="annottext">AxisType
-</span><a href="#local-6989586621679088455"><span class="hs-identifier hs-var">ymode</span></a></span><span>
-</span><span id="line-18"></span><span>    </span><span id="local-6989586621679088423"><span class="annot"><span class="annottext">barm :: Maybe BarMode
-</span><a href="#local-6989586621679088423"><span class="hs-identifier hs-var hs-var">barm</span></a></span></span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">BarMode -&gt; Maybe BarMode
+</span><a href="#local-6989586621679090131"><span class="hs-identifier hs-var">ymode</span></a></span><span>
+</span><span id="line-18"></span><span>    </span><span id="local-6989586621679090099"><span class="annot"><span class="annottext">barm :: Maybe BarMode
+</span><a href="#local-6989586621679090099"><span class="hs-identifier hs-var hs-var">barm</span></a></span></span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">BarMode -&gt; Maybe BarMode
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">BarMode
-</span><a href="#local-6989586621679088454"><span class="hs-identifier hs-var">barMode</span></a></span><span>
-</span><span id="line-19"></span><span>    </span><span id="local-6989586621679088427"><span class="annot"><span class="annottext">layout :: Layout
-</span><a href="#local-6989586621679088427"><span class="hs-identifier hs-var hs-var">layout</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679090130"><span class="hs-identifier hs-var">barMode</span></a></span><span>
+</span><span id="line-19"></span><span>    </span><span id="local-6989586621679090103"><span class="annot"><span class="annottext">layout :: Layout
+</span><a href="#local-6989586621679090103"><span class="hs-identifier hs-var hs-var">layout</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 -&gt; Maybe Axis
 -&gt; Maybe Axis
 -&gt; Maybe BarMode
@@ -95,19 +95,19 @@ forall a. a -&gt; Maybe a
 -&gt; Maybe Margin
 -&gt; Layout
 </span><a href="Graphics.Plotly.Internal.html#Layout"><span class="hs-identifier hs-var">Layout</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679088459"><span class="hs-identifier hs-var">title'</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Axis
-</span><a href="#local-6989586621679088426"><span class="hs-identifier hs-var">xaxis</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Axis
-</span><a href="#local-6989586621679088424"><span class="hs-identifier hs-var">yaxis</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe BarMode
-</span><a href="#local-6989586621679088423"><span class="hs-identifier hs-var">barm</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679088448"><span class="hs-identifier hs-var">height</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679088447"><span class="hs-identifier hs-var">width</span></a></span><span>
+</span><a href="#local-6989586621679090135"><span class="hs-identifier hs-var">title'</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Axis
+</span><a href="#local-6989586621679090102"><span class="hs-identifier hs-var">xaxis</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Axis
+</span><a href="#local-6989586621679090100"><span class="hs-identifier hs-var">yaxis</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe BarMode
+</span><a href="#local-6989586621679090099"><span class="hs-identifier hs-var">barm</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679090124"><span class="hs-identifier hs-var">height</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679090123"><span class="hs-identifier hs-var">width</span></a></span><span>
 </span><span id="line-20"></span><span>                    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool -&gt; Maybe Bool
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679088449"><span class="hs-identifier hs-var">legend</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Margin -&gt; Maybe Margin
+</span><a href="#local-6989586621679090125"><span class="hs-identifier hs-var">legend</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Margin -&gt; Maybe Margin
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">Margin
-</span><a href="#local-6989586621679088446"><span class="hs-identifier hs-var">margin</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679090122"><span class="hs-identifier hs-var">margin</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-21"></span><span>
 </span><span id="line-22"></span><span class="hs-comment">-- | Trace Independent Plot Config</span><span>
 </span><span id="line-23"></span><span class="hs-keyword">data</span><span> </span><span id="PlotConfig"><span class="annot"><a href="Graphics.Plotly.Default.html#PlotConfig"><span class="hs-identifier hs-var">PlotConfig</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="PlotConfig"><span class="annot"><a href="Graphics.Plotly.Default.html#PlotConfig"><span class="hs-identifier hs-var">PlotConfig</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="%24sel%3Atitle%27%3APlotConfig"><span class="annot"><span class="annottext">PlotConfig -&gt; String
@@ -142,7 +142,7 @@ forall a. a -&gt; Maybe a
 </span><a href="Graphics.Plotly.Default.html#%24sel%3Amarker%3APlotConfig"><span class="hs-identifier hs-var hs-var">marker</span></a></span></span><span>       </span><span class="hs-glyph">::</span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Graphics.Plotly.Internal.html#Marker"><span class="hs-identifier hs-type">Marker</span></a></span><span>     </span><span class="hs-comment">-- ^ Marker (default 0.5 Circle 1.0)</span><span>
 </span><span id="line-38"></span><span>                             </span><span class="hs-special">,</span><span> </span><span id="%24sel%3Abins%3APlotConfig"><span class="annot"><span class="annottext">PlotConfig -&gt; XBins
 </span><a href="Graphics.Plotly.Default.html#%24sel%3Abins%3APlotConfig"><span class="hs-identifier hs-var hs-var">bins</span></a></span></span><span>         </span><span class="hs-glyph">::</span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Graphics.Plotly.Internal.html#XBins"><span class="hs-identifier hs-type">XBins</span></a></span><span>      </span><span class="hs-comment">-- ^ Histogram bins (default 0.05 Nothing Nothing)</span><span>
-</span><span id="line-39"></span><span>                             </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679088416"><span id="local-6989586621679088418"><span id="local-6989586621679088420"><span class="annot"><span class="annottext">Int -&gt; PlotConfig -&gt; ShowS
+</span><span id="line-39"></span><span>                             </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679090092"><span id="local-6989586621679090094"><span id="local-6989586621679090096"><span class="annot"><span class="annottext">Int -&gt; PlotConfig -&gt; ShowS
 [PlotConfig] -&gt; ShowS
 PlotConfig -&gt; String
 (Int -&gt; PlotConfig -&gt; ShowS)

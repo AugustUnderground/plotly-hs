@@ -103,7 +103,7 @@ Axis :: !String -> !Bool -> !Bool -> !AxisType -> Axis
 
 -- | Parallel Coordinate Lines
 data Line
-Line :: !Maybe Bool -> !Maybe Bool -> !Maybe ColorScale -> ![Double] -> Line
+Line :: !Maybe Bool -> !Maybe Bool -> !Maybe ColorScale -> !Maybe ColorMap -> !Maybe [Double] -> Line
 
 -- | Show Color Bar
 [$sel:showscale:Line] :: Line -> !Maybe Bool
@@ -114,8 +114,11 @@ Line :: !Maybe Bool -> !Maybe Bool -> !Maybe ColorScale -> ![Double] -> Line
 -- | Color Scale
 [$sel:colorscale:Line] :: Line -> !Maybe ColorScale
 
+-- | Color Map
+[$sel:colormap:Line] :: Line -> !Maybe ColorMap
+
 -- | Values represnting the color
-[$sel:color:Line] :: Line -> ![Double]
+[$sel:color:Line] :: Line -> !Maybe [Double]
 
 -- | Marker Config
 data Marker
@@ -274,6 +277,7 @@ X :: Symbol
 
 -- | Color scales for Heamap / 3D Plots
 data ColorScale
+Discrete :: ColorScale
 Blackbody :: ColorScale
 Bluered :: ColorScale
 Blues :: ColorScale
@@ -292,6 +296,25 @@ Reds :: ColorScale
 Viridis :: ColorScale
 YlGnBu :: ColorScale
 YlOrRd :: ColorScale
+
+-- | Some Color Strings
+data Color
+Red :: Color
+Green :: Color
+Blue :: Color
+Yellow :: Color
+Magenta :: Color
+Cyan :: Color
+Black :: Color
+Gray :: Color
+White :: Color
+
+-- | Type alias for mapping a color
+data ColorMapping
+ColorMapping :: !Double -> !Color -> ColorMapping
+
+-- | Type alias for a list of color mappings
+type ColorMap = [ColorMapping]
 
 -- | Bar Layout
 data BarMode
@@ -376,7 +399,11 @@ instance GHC.Show.Show Graphics.Plotly.Internal.ColorScale
 instance GHC.Classes.Eq Graphics.Plotly.Internal.ColorScale
 instance GHC.Show.Show Graphics.Plotly.Internal.TraceS
 instance GHC.Show.Show Graphics.Plotly.Internal.TraceH
-instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Line
+instance GHC.Generics.Generic Graphics.Plotly.Internal.Color
+instance GHC.Classes.Eq Graphics.Plotly.Internal.Color
+instance GHC.Enum.Enum Graphics.Plotly.Internal.Color
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.ColorMapping
+instance GHC.Generics.Generic Graphics.Plotly.Internal.ColorMapping
 instance GHC.Generics.Generic Graphics.Plotly.Internal.Line
 instance GHC.Show.Show Graphics.Plotly.Internal.Line
 instance GHC.Show.Show Graphics.Plotly.Internal.TraceP
@@ -394,6 +421,10 @@ instance GHC.Generics.Generic Graphics.Plotly.Internal.Trace
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Trace
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.BarMode
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.TraceP
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Line
+instance GHC.Show.Show Graphics.Plotly.Internal.ColorMapping
+instance GHC.Show.Show Graphics.Plotly.Internal.Color
+instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Color
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.TraceH
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.TraceS
 instance Data.Aeson.Types.ToJSON.ToJSON Graphics.Plotly.Internal.Symbol
@@ -496,7 +527,10 @@ surface' :: [String] -> [Double] -> [Double] -> [[[Double]]] -> PlotConfig -> Sc
 surface :: [String] -> [[Double]] -> [[Double]] -> [[[Double]]] -> PlotConfig -> Script
 
 -- | Parallel Coordinate Plot without line gradient
-parcoord' :: [String] -> [[[Double]]] -> PlotConfig -> Script
+parcoord'' :: [String] -> [[[Double]]] -> PlotConfig -> Script
+
+-- | Parallel Coordinate Plot with discrete line colors
+parcoord' :: [Double] -> [String] -> [[[Double]]] -> PlotConfig -> Script
 
 -- | Parallel Coordinate Plot with line gradient
 parcoord :: [Double] -> [String] -> [[[Double]]] -> PlotConfig -> Script
@@ -598,8 +632,24 @@ Category :: AxisType
 -- | Multi Category Axis (?)
 MultiCategory :: AxisType
 
+-- | Some Color Strings
+data Color
+Red :: Color
+Green :: Color
+Blue :: Color
+Yellow :: Color
+Magenta :: Color
+Cyan :: Color
+Black :: Color
+Gray :: Color
+White :: Color
+
+-- | Type alias for a list of color mappings
+type ColorMap = [ColorMapping]
+
 -- | Color scales for Heamap / 3D Plots
 data ColorScale
+Discrete :: ColorScale
 Blackbody :: ColorScale
 Bluered :: ColorScale
 Blues :: ColorScale
@@ -630,9 +680,22 @@ Square :: Symbol
 SquareOpen :: Symbol
 X :: Symbol
 
+-- | Marker Config
+data Marker
+Marker :: !Double -> !Symbol -> !Double -> Marker
+
+-- | Marker Size
+[$sel:size:Marker] :: Marker -> !Double
+
+-- | Marker Symbol
+[$sel:symbol:Marker] :: Marker -> !Symbol
+
+-- | Marker Opacity
+[$sel:opacity:Marker] :: Marker -> !Double
+
 -- | Parallel Coordinate Lines
 data Line
-Line :: !Maybe Bool -> !Maybe Bool -> !Maybe ColorScale -> ![Double] -> Line
+Line :: !Maybe Bool -> !Maybe Bool -> !Maybe ColorScale -> !Maybe ColorMap -> !Maybe [Double] -> Line
 
 -- | Show Color Bar
 [$sel:showscale:Line] :: Line -> !Maybe Bool
@@ -643,8 +706,24 @@ Line :: !Maybe Bool -> !Maybe Bool -> !Maybe ColorScale -> ![Double] -> Line
 -- | Color Scale
 [$sel:colorscale:Line] :: Line -> !Maybe ColorScale
 
+-- | Color Map
+[$sel:colormap:Line] :: Line -> !Maybe ColorMap
+
 -- | Values represnting the color
-[$sel:color:Line] :: Line -> ![Double]
+[$sel:color:Line] :: Line -> !Maybe [Double]
+
+-- | Bins in Histogram
+data XBins
+XBins :: !Double -> !Maybe Double -> !Maybe Double -> XBins
+
+-- | Size of Bins
+[$sel:size:XBins] :: XBins -> !Double
+
+-- | Start of Bins
+[$sel:start:XBins] :: XBins -> !Maybe Double
+
+-- | End of Bins
+[$sel:end:XBins] :: XBins -> !Maybe Double
 
 -- | Layout Margins
 data Margin

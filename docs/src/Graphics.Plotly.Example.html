@@ -12,12 +12,12 @@
 </span><span id="line-12"></span><span class="hs-comment">-- | Put All plots in the plots directory</span><span>
 </span><span id="line-13"></span><span class="annot"><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-type">plotPath</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FilePath</span></span><span>
 </span><span id="line-14"></span><span id="plotPath"><span class="annot"><span class="annottext">plotPath :: String -&gt; String
-</span><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-var hs-var">plotPath</span></a></span></span><span> </span><span id="local-6989586621679088849"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679088849"><span class="hs-identifier hs-var">name</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-var hs-var">plotPath</span></a></span></span><span> </span><span id="local-6989586621679090571"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679090571"><span class="hs-identifier hs-var">name</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;./plots/&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. [a] -&gt; [a] -&gt; [a]
 </span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679088849"><span class="hs-identifier hs-var">name</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679090571"><span class="hs-identifier hs-var">name</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. [a] -&gt; [a] -&gt; [a]
 </span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;.html&quot;</span></span><span>
@@ -30,10 +30,10 @@ forall a. [a] -&gt; [a] -&gt; [a]
 </span><a href="Graphics.Plotly.html#plot"><span class="hs-identifier hs-var">plot</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; String
 </span><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-var">plotPath</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;scatter&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Script
-</span><a href="#local-6989586621679088846"><span class="hs-identifier hs-var">scatterPlot</span></a></span><span>
+</span><a href="#local-6989586621679090568"><span class="hs-identifier hs-var">scatterPlot</span></a></span><span>
 </span><span id="line-20"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-21"></span><span>    </span><span id="local-6989586621679088846"><span class="annot"><span class="annottext">scatterPlot :: Script
-</span><a href="#local-6989586621679088846"><span class="hs-identifier hs-var hs-var">scatterPlot</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [[Double]] -&gt; [[Double]] -&gt; PlotConfig -&gt; Script
+</span><span id="line-21"></span><span>    </span><span id="local-6989586621679090568"><span class="annot"><span class="annottext">scatterPlot :: Script
+</span><a href="#local-6989586621679090568"><span class="hs-identifier hs-var hs-var">scatterPlot</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [[Double]] -&gt; [[Double]] -&gt; PlotConfig -&gt; Script
 </span><a href="Graphics.Plotly.html#scatter%27"><span class="hs-identifier hs-var">scatter'</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;foo&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;bar&quot;</span></span><span class="hs-special">]</span><span>                     </span><span class="hs-comment">-- Trace Names</span><span>
@@ -66,8 +66,8 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span id="line-27"></span><span class="annot"><a href="Graphics.Plotly.Example.html#histExample"><span class="hs-identifier hs-type">histExample</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-28"></span><span id="histExample"><span class="annot"><span class="annottext">histExample :: IO ()
 </span><a href="Graphics.Plotly.Example.html#histExample"><span class="hs-identifier hs-var hs-var">histExample</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-29"></span><span>    </span><span id="local-6989586621679088840"><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088840"><span class="hs-identifier hs-var">x1</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; IO Double -&gt; IO [Double]
+</span><span id="line-29"></span><span>    </span><span id="local-6989586621679090562"><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090562"><span class="hs-identifier hs-var">x1</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; IO Double -&gt; IO [Double]
 forall (m :: * -&gt; *) a. Applicative m =&gt; Int -&gt; m a -&gt; m [a]
 </span><span class="hs-identifier hs-var">replicateM</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">100</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Double, Double) -&gt; IO Double
@@ -75,8 +75,8 @@ forall a (m :: * -&gt; *). (Random a, MonadIO m) =&gt; (a, a) -&gt; m a
 </span><span class="hs-identifier hs-var">randomRIO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">0</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">5</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">)</span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Double</span></span><span class="hs-special">]</span><span>
-</span><span id="line-30"></span><span>    </span><span id="local-6989586621679088837"><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088837"><span class="hs-identifier hs-var">x2</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; IO Double -&gt; IO [Double]
+</span><span id="line-30"></span><span>    </span><span id="local-6989586621679090559"><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090559"><span class="hs-identifier hs-var">x2</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; IO Double -&gt; IO [Double]
 forall (m :: * -&gt; *) a. Applicative m =&gt; Int -&gt; m a -&gt; m [a]
 </span><span class="hs-identifier hs-var">replicateM</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">100</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Double, Double) -&gt; IO Double
@@ -84,8 +84,8 @@ forall a (m :: * -&gt; *). (Random a, MonadIO m) =&gt; (a, a) -&gt; m a
 </span><span class="hs-identifier hs-var">randomRIO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">0</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">5</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">)</span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Double</span></span><span class="hs-special">]</span><span>
-</span><span id="line-31"></span><span>    </span><span id="local-6989586621679088836"><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088836"><span class="hs-identifier hs-var">x3</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; IO Double -&gt; IO [Double]
+</span><span id="line-31"></span><span>    </span><span id="local-6989586621679090558"><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090558"><span class="hs-identifier hs-var">x3</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; IO Double -&gt; IO [Double]
 forall (m :: * -&gt; *) a. Applicative m =&gt; Int -&gt; m a -&gt; m [a]
 </span><span class="hs-identifier hs-var">replicateM</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">100</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Double, Double) -&gt; IO Double
@@ -93,15 +93,15 @@ forall a (m :: * -&gt; *). (Random a, MonadIO m) =&gt; (a, a) -&gt; m a
 </span><span class="hs-identifier hs-var">randomRIO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">0</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">5</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">)</span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Double</span></span><span class="hs-special">]</span><span>
-</span><span id="line-32"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679088835"><span class="annot"><span class="annottext">histPlot :: Script
-</span><a href="#local-6989586621679088835"><span class="hs-identifier hs-var hs-var">histPlot</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [[Double]] -&gt; PlotConfig -&gt; Script
+</span><span id="line-32"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679090557"><span class="annot"><span class="annottext">histPlot :: Script
+</span><a href="#local-6989586621679090557"><span class="hs-identifier hs-var hs-var">histPlot</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [[Double]] -&gt; PlotConfig -&gt; Script
 </span><a href="Graphics.Plotly.html#histogram"><span class="hs-identifier hs-var">histogram</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;x1&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;x2&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;x3&quot;</span></span><span class="hs-special">]</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088840"><span class="hs-identifier hs-var">x1</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088837"><span class="hs-identifier hs-var">x2</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088836"><span class="hs-identifier hs-var">x3</span></a></span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679090562"><span class="hs-identifier hs-var">x1</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090559"><span class="hs-identifier hs-var">x2</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090558"><span class="hs-identifier hs-var">x3</span></a></span><span class="hs-special">]</span><span>
 </span><span id="line-33"></span><span>                 </span><span class="annot"><span class="annottext">(PlotConfig -&gt; Script) -&gt; PlotConfig -&gt; Script
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PlotConfig
@@ -112,7 +112,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="Graphics.Plotly.html#plot"><span class="hs-identifier hs-var">plot</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; String
 </span><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-var">plotPath</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;hist&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Script
-</span><a href="#local-6989586621679088835"><span class="hs-identifier hs-var">histPlot</span></a></span><span>
+</span><a href="#local-6989586621679090557"><span class="hs-identifier hs-var">histPlot</span></a></span><span>
 </span><span id="line-35"></span><span>
 </span><span id="line-36"></span><span class="hs-comment">-- Heatmap Plot as seen here:</span><span>
 </span><span id="line-37"></span><span class="hs-comment">-- https://plotly.com/javascript/heatmaps/#heatmap-with-categorical-axis-labels</span><span>
@@ -122,10 +122,10 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="Graphics.Plotly.html#plot"><span class="hs-identifier hs-var">plot</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; String
 </span><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-var">plotPath</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;heatmap&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Script
-</span><a href="#local-6989586621679088831"><span class="hs-identifier hs-var">heatPlot</span></a></span><span>
+</span><a href="#local-6989586621679090553"><span class="hs-identifier hs-var">heatPlot</span></a></span><span>
 </span><span id="line-40"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-41"></span><span>    </span><span id="local-6989586621679088831"><span class="annot"><span class="annottext">heatPlot :: Script
-</span><a href="#local-6989586621679088831"><span class="hs-identifier hs-var hs-var">heatPlot</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [[Double]] -&gt; PlotConfig -&gt; Script
+</span><span id="line-41"></span><span>    </span><span id="local-6989586621679090553"><span class="annot"><span class="annottext">heatPlot :: Script
+</span><a href="#local-6989586621679090553"><span class="hs-identifier hs-var hs-var">heatPlot</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [[Double]] -&gt; PlotConfig -&gt; Script
 </span><a href="Graphics.Plotly.html#heatmap"><span class="hs-identifier hs-var">heatmap</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;Monday&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;Tuesday&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
@@ -162,10 +162,10 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="Graphics.Plotly.html#plot"><span class="hs-identifier hs-var">plot</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; String
 </span><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-var">plotPath</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;scatter3d&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Script
-</span><a href="#local-6989586621679088828"><span class="hs-identifier hs-var">scatter3dPlot</span></a></span><span>
+</span><a href="#local-6989586621679090550"><span class="hs-identifier hs-var">scatter3dPlot</span></a></span><span>
 </span><span id="line-49"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-50"></span><span>    </span><span id="local-6989586621679088828"><span class="annot"><span class="annottext">scatter3dPlot :: Script
-</span><a href="#local-6989586621679088828"><span class="hs-identifier hs-var hs-var">scatter3dPlot</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String]
+</span><span id="line-50"></span><span>    </span><span id="local-6989586621679090550"><span class="annot"><span class="annottext">scatter3dPlot :: Script
+</span><a href="#local-6989586621679090550"><span class="hs-identifier hs-var hs-var">scatter3dPlot</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String]
 -&gt; [[Double]] -&gt; [[Double]] -&gt; [[Double]] -&gt; PlotConfig -&gt; Script
 </span><a href="Graphics.Plotly.html#scatter3d"><span class="hs-identifier hs-var">scatter3d</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;point cloud&quot;</span></span><span class="hs-special">]</span><span> </span><span class="hs-special">[</span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
@@ -199,17 +199,17 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="Graphics.Plotly.html#plot"><span class="hs-identifier hs-var">plot</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; String
 </span><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-var">plotPath</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;surface1&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Script
-</span><a href="#local-6989586621679088824"><span class="hs-identifier hs-var">surfPlot''</span></a></span><span>
+</span><a href="#local-6989586621679090546"><span class="hs-identifier hs-var">surfPlot''</span></a></span><span>
 </span><span id="line-57"></span><span>              </span><span class="annot"><span class="annottext">IO () -&gt; IO () -&gt; IO ()
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Script -&gt; IO ()
 </span><a href="Graphics.Plotly.html#plot"><span class="hs-identifier hs-var">plot</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; String
 </span><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-var">plotPath</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;surface2&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Script
-</span><a href="#local-6989586621679088823"><span class="hs-identifier hs-var">surfPlot'</span></a></span><span>
+</span><a href="#local-6989586621679090545"><span class="hs-identifier hs-var">surfPlot'</span></a></span><span>
 </span><span id="line-58"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-59"></span><span>    </span><span id="local-6989586621679088822"><span class="annot"><span class="annottext">xx :: [Double]
-</span><a href="#local-6989586621679088822"><span class="hs-identifier hs-var hs-var">xx</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Double -&gt; Double) -&gt; [Double] -&gt; [Double]
+</span><span id="line-59"></span><span>    </span><span id="local-6989586621679090544"><span class="annot"><span class="annottext">xx :: [Double]
+</span><a href="#local-6989586621679090544"><span class="hs-identifier hs-var hs-var">xx</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Double -&gt; Double) -&gt; [Double] -&gt; [Double]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">Double -&gt; Double -&gt; Double
 forall a. Num a =&gt; a -&gt; a -&gt; a
@@ -222,16 +222,16 @@ forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-number">5</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">0</span></span><span> </span><span class="hs-glyph">..</span><span> </span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">14</span></span><span class="hs-special">]</span><span>
-</span><span id="line-60"></span><span>    </span><span id="local-6989586621679088818"><span class="annot"><span class="annottext">yy :: [Double]
-</span><a href="#local-6989586621679088818"><span class="hs-identifier hs-var hs-var">yy</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
+</span><span id="line-60"></span><span>    </span><span id="local-6989586621679090540"><span class="annot"><span class="annottext">yy :: [Double]
+</span><a href="#local-6989586621679090540"><span class="hs-identifier hs-var hs-var">yy</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">2</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">4</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">6</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">8</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">10</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">12</span></span><span class="hs-special">]</span><span>
-</span><span id="line-61"></span><span>    </span><span id="local-6989586621679088817"><span class="annot"><span class="annottext">zz :: [[Double]]
-</span><a href="#local-6989586621679088817"><span class="hs-identifier hs-var hs-var">zz</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
+</span><span id="line-61"></span><span>    </span><span id="local-6989586621679090539"><span class="annot"><span class="annottext">zz :: [[Double]]
+</span><a href="#local-6989586621679090539"><span class="hs-identifier hs-var hs-var">zz</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">8.83</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">8.89</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">8.81</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
@@ -336,20 +336,20 @@ forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-number">9.18</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">9.2</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">9.18</span></span><span class="hs-special">]</span><span> </span><span class="hs-special">]</span><span>
-</span><span id="line-76"></span><span>    </span><span id="local-6989586621679088824"><span class="annot"><span class="annottext">surfPlot'' :: Script
-</span><a href="#local-6989586621679088824"><span class="hs-identifier hs-var hs-var">surfPlot''</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [[[Double]]] -&gt; PlotConfig -&gt; Script
+</span><span id="line-76"></span><span>    </span><span id="local-6989586621679090546"><span class="annot"><span class="annottext">surfPlot'' :: Script
+</span><a href="#local-6989586621679090546"><span class="hs-identifier hs-var hs-var">surfPlot''</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [[[Double]]] -&gt; PlotConfig -&gt; Script
 </span><a href="Graphics.Plotly.html#surface%27%27"><span class="hs-identifier hs-var">surface''</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;surface&quot;</span></span><span class="hs-special">]</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">[[Double]]
-</span><a href="#local-6989586621679088817"><span class="hs-identifier hs-var">zz</span></a></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">PlotConfig
+</span><a href="#local-6989586621679090539"><span class="hs-identifier hs-var">zz</span></a></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">PlotConfig
 </span><a href="Graphics.Plotly.Default.html#defaultConfig"><span class="hs-identifier hs-var">defaultConfig</span></a></span><span>
-</span><span id="line-77"></span><span>    </span><span id="local-6989586621679088823"><span class="annot"><span class="annottext">surfPlot' :: Script
-</span><a href="#local-6989586621679088823"><span class="hs-identifier hs-var hs-var">surfPlot'</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String]
+</span><span id="line-77"></span><span>    </span><span id="local-6989586621679090545"><span class="annot"><span class="annottext">surfPlot' :: Script
+</span><a href="#local-6989586621679090545"><span class="hs-identifier hs-var hs-var">surfPlot'</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String]
 -&gt; [Double] -&gt; [Double] -&gt; [[[Double]]] -&gt; PlotConfig -&gt; Script
 </span><a href="Graphics.Plotly.html#surface%27"><span class="hs-identifier hs-var">surface'</span></a></span><span>  </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;surface&quot;</span></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088822"><span class="hs-identifier hs-var">xx</span></a></span><span> </span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088818"><span class="hs-identifier hs-var">yy</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">[[Double]]
-</span><a href="#local-6989586621679088817"><span class="hs-identifier hs-var">zz</span></a></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">PlotConfig
+</span><a href="#local-6989586621679090544"><span class="hs-identifier hs-var">xx</span></a></span><span> </span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090540"><span class="hs-identifier hs-var">yy</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">[[Double]]
+</span><a href="#local-6989586621679090539"><span class="hs-identifier hs-var">zz</span></a></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">PlotConfig
 </span><a href="Graphics.Plotly.Default.html#defaultConfig"><span class="hs-identifier hs-var">defaultConfig</span></a></span><span>
 </span><span id="line-78"></span><span>
 </span><span id="line-79"></span><span>
@@ -360,90 +360,96 @@ forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><a href="Graphics.Plotly.html#plot"><span class="hs-identifier hs-var">plot</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; String
 </span><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-var">plotPath</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;parcoords1&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Script
-</span><a href="#local-6989586621679088813"><span class="hs-identifier hs-var">parPlot'</span></a></span><span>
+</span><a href="#local-6989586621679090535"><span class="hs-identifier hs-var">parPlot'</span></a></span><span>
 </span><span id="line-83"></span><span>                </span><span class="annot"><span class="annottext">IO () -&gt; IO () -&gt; IO ()
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Script -&gt; IO ()
 </span><a href="Graphics.Plotly.html#plot"><span class="hs-identifier hs-var">plot</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; String
 </span><a href="Graphics.Plotly.Example.html#plotPath"><span class="hs-identifier hs-var">plotPath</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;parcoords2&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Script
-</span><a href="#local-6989586621679088812"><span class="hs-identifier hs-var">parPlot</span></a></span><span>
+</span><a href="#local-6989586621679090534"><span class="hs-identifier hs-var">parPlot</span></a></span><span>
 </span><span id="line-84"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-85"></span><span>    </span><span id="local-6989586621679088811"><span class="annot"><span class="annottext">as :: [Double]
-</span><a href="#local-6989586621679088811"><span class="hs-keyword hs-var hs-var">as</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
+</span><span id="line-85"></span><span>    </span><span id="local-6989586621679090533"><span class="annot"><span class="annottext">as :: [Double]
+</span><a href="#local-6989586621679090533"><span class="hs-keyword hs-var hs-var">as</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">1</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">2</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">3</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">5</span></span><span class="hs-special">]</span><span>
-</span><span id="line-86"></span><span>    </span><span id="local-6989586621679088810"><span class="annot"><span class="annottext">bs :: [Double]
-</span><a href="#local-6989586621679088810"><span class="hs-identifier hs-var hs-var">bs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
+</span><span id="line-86"></span><span>    </span><span id="local-6989586621679090532"><span class="annot"><span class="annottext">bs :: [Double]
+</span><a href="#local-6989586621679090532"><span class="hs-identifier hs-var hs-var">bs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">3.1</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">1.5</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">4.5</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">9.3</span></span><span class="hs-special">]</span><span>
-</span><span id="line-87"></span><span>    </span><span id="local-6989586621679088809"><span class="annot"><span class="annottext">cs :: [Double]
-</span><a href="#local-6989586621679088809"><span class="hs-identifier hs-var hs-var">cs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
+</span><span id="line-87"></span><span>    </span><span id="local-6989586621679090531"><span class="annot"><span class="annottext">cs :: [Double]
+</span><a href="#local-6989586621679090531"><span class="hs-identifier hs-var hs-var">cs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">2</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">4</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">6</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">8</span></span><span class="hs-special">]</span><span>
-</span><span id="line-88"></span><span>    </span><span id="local-6989586621679088808"><span class="annot"><span class="annottext">ds :: [Double]
-</span><a href="#local-6989586621679088808"><span class="hs-identifier hs-var hs-var">ds</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-glyph">-</span><span class="annot"><span class="annottext">Double
+</span><span id="line-88"></span><span>    </span><span id="local-6989586621679090530"><span class="annot"><span class="annottext">ds :: [Double]
+</span><a href="#local-6989586621679090530"><span class="hs-identifier hs-var hs-var">ds</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-glyph">-</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">3</span></span><span class="hs-special">,</span><span class="hs-glyph">-</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">5</span></span><span class="hs-special">,</span><span class="hs-glyph">-</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">10</span></span><span class="hs-special">,</span><span class="hs-glyph">-</span><span class="annot"><span class="annottext">Double
 </span><span class="hs-number">7</span></span><span class="hs-special">]</span><span>
-</span><span id="line-89"></span><span>    </span><span id="local-6989586621679088807"><span class="annot"><span class="annottext">c' :: [Double]
-</span><a href="#local-6989586621679088807"><span class="hs-identifier hs-var hs-var">c'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
-</span><span class="hs-number">0.2</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
-</span><span class="hs-number">0.4</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
-</span><span class="hs-number">0.6</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
-</span><span class="hs-number">0.8</span></span><span class="hs-special">]</span><span>
-</span><span id="line-90"></span><span>    </span><span id="local-6989586621679088813"><span class="annot"><span class="annottext">parPlot' :: Script
-</span><a href="#local-6989586621679088813"><span class="hs-identifier hs-var hs-var">parPlot'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [[[Double]]] -&gt; PlotConfig -&gt; Script
-</span><a href="Graphics.Plotly.html#parcoord%27"><span class="hs-identifier hs-var">parcoord'</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
+</span><span id="line-89"></span><span>    </span><span id="local-6989586621679090529"><span class="annot"><span class="annottext">c' :: [Double]
+</span><a href="#local-6989586621679090529"><span class="hs-identifier hs-var hs-var">c'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Double
+</span><span class="hs-number">0.0</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
+</span><span class="hs-number">1.0</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
+</span><span class="hs-number">0.0</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
+</span><span class="hs-number">0.0</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
+</span><span class="hs-number">1.0</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
+</span><span class="hs-number">1.0</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
+</span><span class="hs-number">0.0</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">Double
+</span><span class="hs-number">1.0</span></span><span class="hs-special">]</span><span>
+</span><span id="line-90"></span><span>    </span><span id="local-6989586621679090535"><span class="annot"><span class="annottext">parPlot' :: Script
+</span><a href="#local-6989586621679090535"><span class="hs-identifier hs-var hs-var">parPlot'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [[[Double]]] -&gt; PlotConfig -&gt; Script
+</span><a href="Graphics.Plotly.html#parcoord%27%27"><span class="hs-identifier hs-var">parcoord''</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;A&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;B&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;C&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;D&quot;</span></span><span class="hs-special">]</span><span> </span><span class="hs-special">[</span><span class="hs-special">[</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088811"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088810"><span class="hs-identifier hs-var">bs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088809"><span class="hs-identifier hs-var">cs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088808"><span class="hs-identifier hs-var">ds</span></a></span><span class="hs-special">]</span><span class="hs-special">,</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088810"><span class="hs-identifier hs-var">bs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088808"><span class="hs-identifier hs-var">ds</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088811"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088809"><span class="hs-identifier hs-var">cs</span></a></span><span class="hs-special">]</span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679090533"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090532"><span class="hs-identifier hs-var">bs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090531"><span class="hs-identifier hs-var">cs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090530"><span class="hs-identifier hs-var">ds</span></a></span><span class="hs-special">]</span><span class="hs-special">,</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090532"><span class="hs-identifier hs-var">bs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090530"><span class="hs-identifier hs-var">ds</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090533"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090531"><span class="hs-identifier hs-var">cs</span></a></span><span class="hs-special">]</span><span class="hs-special">]</span><span>
 </span><span id="line-91"></span><span>             </span><span class="annot"><span class="annottext">(PlotConfig -&gt; Script) -&gt; PlotConfig -&gt; Script
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PlotConfig
 </span><a href="Graphics.Plotly.Default.html#defaultConfig"><span class="hs-identifier hs-var">defaultConfig</span></a></span><span> </span><span class="hs-special">{</span><span class="annot"><span class="annottext">$sel:width:PlotConfig :: Int
-</span><a href="#local-6989586621679088805"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679090527"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1500</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">$sel:height:PlotConfig :: Int
-</span><a href="#local-6989586621679088804"><span class="hs-identifier hs-var">height</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679090526"><span class="hs-identifier hs-var">height</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">600</span></span><span class="hs-special">}</span><span>
-</span><span id="line-92"></span><span>    </span><span id="local-6989586621679088812"><span class="annot"><span class="annottext">parPlot :: Script
-</span><a href="#local-6989586621679088812"><span class="hs-identifier hs-var hs-var">parPlot</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Double] -&gt; [String] -&gt; [[[Double]]] -&gt; PlotConfig -&gt; Script
-</span><a href="Graphics.Plotly.html#parcoord"><span class="hs-identifier hs-var">parcoord</span></a></span><span> </span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088807"><span class="hs-identifier hs-var">c'</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
+</span><span id="line-92"></span><span>    </span><span id="local-6989586621679090534"><span class="annot"><span class="annottext">parPlot :: Script
+</span><a href="#local-6989586621679090534"><span class="hs-identifier hs-var hs-var">parPlot</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Double] -&gt; [String] -&gt; [[[Double]]] -&gt; PlotConfig -&gt; Script
+</span><a href="Graphics.Plotly.html#parcoord%27"><span class="hs-identifier hs-var">parcoord'</span></a></span><span> </span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090529"><span class="hs-identifier hs-var">c'</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;A&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;B&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;C&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;D&quot;</span></span><span class="hs-special">]</span><span> </span><span class="hs-special">[</span><span class="hs-special">[</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088811"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088810"><span class="hs-identifier hs-var">bs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088809"><span class="hs-identifier hs-var">cs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088808"><span class="hs-identifier hs-var">ds</span></a></span><span class="hs-special">]</span><span class="hs-special">,</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088810"><span class="hs-identifier hs-var">bs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088808"><span class="hs-identifier hs-var">ds</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088811"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
-</span><a href="#local-6989586621679088809"><span class="hs-identifier hs-var">cs</span></a></span><span class="hs-special">]</span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679090533"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090532"><span class="hs-identifier hs-var">bs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090531"><span class="hs-identifier hs-var">cs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090530"><span class="hs-identifier hs-var">ds</span></a></span><span class="hs-special">]</span><span class="hs-special">,</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090532"><span class="hs-identifier hs-var">bs</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090530"><span class="hs-identifier hs-var">ds</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090533"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">,</span><span class="annot"><span class="annottext">[Double]
+</span><a href="#local-6989586621679090531"><span class="hs-identifier hs-var">cs</span></a></span><span class="hs-special">]</span><span class="hs-special">]</span><span>
 </span><span id="line-93"></span><span>             </span><span class="annot"><span class="annottext">(PlotConfig -&gt; Script) -&gt; PlotConfig -&gt; Script
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PlotConfig
 </span><a href="Graphics.Plotly.Default.html#defaultConfig"><span class="hs-identifier hs-var">defaultConfig</span></a></span><span> </span><span class="hs-special">{</span><span class="annot"><span class="annottext">$sel:width:PlotConfig :: Int
-</span><a href="#local-6989586621679088805"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679090527"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1500</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">$sel:height:PlotConfig :: Int
-</span><a href="#local-6989586621679088804"><span class="hs-identifier hs-var">height</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">600</span></span><span class="hs-special">}</span><span>
+</span><a href="#local-6989586621679090526"><span class="hs-identifier hs-var">height</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">600</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">$sel:colorScale:PlotConfig :: ColorScale
+</span><a href="Graphics.Plotly.Default.html#%24sel%3AcolorScale%3APlotConfig"><span class="hs-identifier hs-var">colorScale</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ColorScale
+</span><a href="Graphics.Plotly.Internal.html#Discrete"><span class="hs-identifier hs-var">Discrete</span></a></span><span class="hs-special">}</span><span>
 </span><span id="line-94"></span></pre></body></html>

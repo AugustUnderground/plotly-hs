@@ -10,8 +10,8 @@ module Graphics.Plotly ( plot, scatter', scatter, histogram, heatmap
                        , parcoord'', parcoord', parcoord
                        , Script, Mode (..), Type (..), Layout (..), BarMode (..)
                        , AxisType (..), Color (..), ColorMap, ColorScale (..)
-                       , Symbol (..), Line (..), Margin (..), PlotConfig (..)
-                       , defaultConfig
+                       , Symbol (..), Marker (..), Line (..), XBins (..), Margin (..)
+                       , PlotConfig (..), defaultConfig
                        ) where
 
 import           Data.List                      (zipWith4)
